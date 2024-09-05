@@ -4,4 +4,4 @@
 format: jb-book
 root: intro
 chapters:
-- file: main
+  - file: ../tugas-1/main
