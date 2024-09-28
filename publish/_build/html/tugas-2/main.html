@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Pencarian dan Penambangan Web - Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online &#8212; JupyterBook Publish - PPW</title>
+    <title>Tugas 2 : Membuat VSM yang berisi TF-IDF &#8212; JupyterBook Publish - PPW</title>
   
   
   
@@ -60,7 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tugas-2/main';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Pencarian dan Penambangan Web - Tugas 1 : Crawling Berita Online" href="../tugas-1/main.html" />
+    <link rel="next" title="Tugas 3 : Implementasi Algoritma Logistic Regression" href="../tugas-3/main.html" />
+    <link rel="prev" title="Tugas 1 : Crawling Berita Online" href="../tugas-1/main.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,15 +179,24 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../tugas-1/main.html">Pencarian dan Penambangan Web - Tugas 1 : Crawling Berita Online</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Crawling &amp; Logistic Regression</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tugas-1/main.html">Tugas 1 : Crawling Berita Online</a></li>
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pencarian dan Penambangan Web - Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 2 : Membuat VSM yang berisi TF-IDF</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../tugas-3/main.html">Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan Algoritma Logistic Regression</a></li>
 
+
+<li class="toctree-l1"><a class="reference internal" href="../tugas-3/main.html">Tugas 3 : Implementasi Algoritma Logistic Regression</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Word Embedding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../word-embedding/eksplorasi.html">Word Embedding</a></li>
 </ul>
 
     </div>
@@ -372,7 +382,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pencarian dan Penambangan Web - Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online</h1>
+    <h1>Tugas 2 : Membuat VSM yang berisi TF-IDF</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -382,7 +392,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pencarian dan Penambangan Web - Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 2 : Membuat VSM yang berisi TF-IDF</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-space-model-vsm">Vector Space Model (VSM)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#term-frequency-inverse-document-frequency-tf-idf">Term Frequency - Inverse Document Frequency (TF-IDF)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#term-frequency">Term Frequency</a></li>
@@ -423,8 +433,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pencarian-dan-penambangan-web-tugas-2-membuat-vsm-dengan-isi-tf-idf-berdasarkan-hasil-crawling-berita-online">
-<h1>Pencarian dan Penambangan Web - Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online<a class="headerlink" href="#pencarian-dan-penambangan-web-tugas-2-membuat-vsm-dengan-isi-tf-idf-berdasarkan-hasil-crawling-berita-online" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="tugas-2-membuat-vsm-yang-berisi-tf-idf">
+<h1>Tugas 2 : Membuat VSM yang berisi TF-IDF<a class="headerlink" href="#tugas-2-membuat-vsm-yang-berisi-tf-idf" title="Link to this heading">#</a></h1>
 <p>Pada Tugas 2 diminta untuk membuat sebuah tabel dengan bentuk VSM (Vector Space Model) yang berisi TF-IDF (Term Frequency - Inverse Document Frequency). Dengan begitu hasil tabel hanya akan berisi angka TF-IDF dari kata unik yang bermunculan dari semua dokumen.</p>
 <p>Dibuat Oleh:</p>
 <ul class="simple">
@@ -2435,8 +2445,17 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Pencarian dan Penambangan Web - Tugas 1 : Crawling Berita Online</p>
+        <p class="prev-next-title">Tugas 1 : Crawling Berita Online</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../tugas-3/main.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tugas 3 : Implementasi Algoritma Logistic Regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -2454,7 +2473,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pencarian dan Penambangan Web - Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 2 : Membuat VSM yang berisi TF-IDF</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-space-model-vsm">Vector Space Model (VSM)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#term-frequency-inverse-document-frequency-tf-idf">Term Frequency - Inverse Document Frequency (TF-IDF)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#term-frequency">Term Frequency</a></li>
