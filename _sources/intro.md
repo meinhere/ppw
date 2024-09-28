@@ -5,5 +5,5 @@ This is to "deploy for my assignment PPW (Pencarian dan Penambangan Web) task". 
 Check out the content pages bundled with this sample book to see more.
 
 ```{tableofcontents}
-
+:depth: 1
 ```
