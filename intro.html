@@ -57,10 +57,12 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Pencarian dan Penambangan Web - Tugas 1 : Crawling Berita Online" href="tugas-1/main.html" />
+    <link rel="next" title="Tugas 1 : Crawling Berita Online" href="tugas-1/main.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,19 +182,24 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="tugas-1/main.html">Pencarian dan Penambangan Web - Tugas 1 : Crawling Berita Online</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Crawling &amp; Logistic Regression</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="tugas-1/main.html">Tugas 1 : Crawling Berita Online</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="tugas-2/main.html">Pencarian dan Penambangan Web - Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tugas-2/main.html">Tugas 2 : Membuat VSM yang berisi TF-IDF</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="tugas-3/main.html">Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan Algoritma Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tugas-3/main.html">Tugas 3 : Implementasi Algoritma Logistic Regression</a></li>
 
 
 
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Word Embedding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="word-embedding/eksplorasi.html">Word Embedding</a></li>
 </ul>
 
     </div>
@@ -395,19 +402,26 @@ document.write(`
 <p>This is to “deploy for my assignment PPW (Pencarian dan Penambangan Web) task”. In here will be there all of my task about “text mining, crawling website, visualization, and evaluation for how to find and mining website more effective” using Jupyter Book.</p>
 <p>Check out the content pages bundled with this sample book to see more.</p>
 <div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Crawling &amp; Logistic Regression</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tugas-1/main.html">Pencarian dan Penambangan Web - Tugas 1 : Crawling Berita Online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tugas-1/main.html">Tugas 1 : Crawling Berita Online</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tugas-1/main.html#crawling-website-berita-online-kompas">Crawling Website Berita Online (Kompas)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tugas-1/main.html#proses-crawling-website">Proses Crawling Website</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tugas-1/main.html#persiapan-library">Persiapan Library</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tugas-2/main.html">Pencarian dan Penambangan Web - Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tugas-2/main.html">Tugas 2 : Membuat VSM yang berisi TF-IDF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tugas-2/main.html#vector-space-model-vsm">Vector Space Model (VSM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tugas-2/main.html#term-frequency-inverse-document-frequency-tf-idf">Term Frequency - Inverse Document Frequency (TF-IDF)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tugas-2/main.html#proses-pembentukan-data-ke-bentuk-vsm-vector-space-model">Proses Pembentukan data ke bentuk VSM (Vector Space Model)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tugas-3/main.html">Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan Algoritma Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tugas-3/main.html">Tugas 3 : Implementasi Algoritma Logistic Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tugas-3/main.html#import-library">Import Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tugas-3/main.html#proses-modeling">Proses Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tugas-3/main.html#saving-model">Saving Model</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Word Embedding</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="word-embedding/eksplorasi.html">Word Embedding</a></li>
 </ul>
 </div>
 </section>
@@ -447,7 +461,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Pencarian dan Penambangan Web - Tugas 1 : Crawling Berita Online</p>
+        <p class="prev-next-title">Tugas 1 : Crawling Berita Online</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

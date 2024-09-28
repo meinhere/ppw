@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan algoritma Logistic Regression &#8212; JupyterBook Publish - PPW</title>
+    <title>Tugas 3 : Implementasi Algoritma Logistic Regression &#8212; JupyterBook Publish - PPW</title>
   
   
   
@@ -179,15 +179,24 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../tugas-1/main.html">Pencarian dan Penambangan Web - Tugas 1 : Crawling Berita Online</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Crawling &amp; Logistic Regression</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tugas-1/main.html">Tugas 1 : Crawling Berita Online</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../tugas-2/main.html">Pencarian dan Penambangan Web - Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tugas-2/main.html">Tugas 2 : Membuat VSM yang berisi TF-IDF</a></li>
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="main.html">Tugas 3 : Implementasi Algoritma Logistic Regression</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Word Embedding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../word-embedding/eksplorasi.html">Word Embedding</a></li>
 </ul>
 
     </div>
@@ -373,7 +382,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan algoritma Logistic Regression</h1>
+    <h1>Tugas 3 : Implementasi Algoritma Logistic Regression</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -383,7 +392,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan algoritma Logistic Regression</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 3 : Implementasi Algoritma Logistic Regression</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-data">Persiapan Data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data-model">Load Data Model</a></li>
@@ -418,8 +427,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pencarian-dan-penambangan-web-tugas-3-implementasi-hasil-vsm-dengan-algoritma-logistic-regression">
-<h1>Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan algoritma Logistic Regression<a class="headerlink" href="#pencarian-dan-penambangan-web-tugas-3-implementasi-hasil-vsm-dengan-algoritma-logistic-regression" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="tugas-3-implementasi-algoritma-logistic-regression">
+<h1>Tugas 3 : Implementasi Algoritma Logistic Regression<a class="headerlink" href="#tugas-3-implementasi-algoritma-logistic-regression" title="Link to this heading">#</a></h1>
 <p>Pada Tugas 3 ini diminta untuk melakukan proses pembuatan model dari data VSM yang telah dibuat sebelumnya menggunakan algoritma Logistic Regression.</p>
 <p>Dibuat Oleh:</p>
 <ul class="simple">
@@ -434,6 +443,12 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-q<span class="w"> </span>Sastrawi
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip is available: 23.2.1 -&gt; 24.2
+[notice] To update, run: python.exe -m pip install --upgrade pip
 </pre></div>
 </div>
 </div>
@@ -474,6 +489,88 @@ document.write(`
 
 <span class="c1"># save model</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># library untuk praproses teks</span>
+<span class="ne">---&gt; </span><span class="mi">14</span> <span class="kn">import</span> <span class="nn">nltk</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">)</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Roaming</span>\<span class="n">Python</span>\<span class="n">Python310</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">nltk</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">146</span>
+<span class="g g-Whitespace">    </span><span class="mi">140</span> <span class="kn">from</span> <span class="nn">nltk.jsontags</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span> <span class="c1">###########################################################</span>
+<span class="g g-Whitespace">    </span><span class="mi">143</span> <span class="c1"># PACKAGES</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span> <span class="c1">###########################################################</span>
+<span class="ne">--&gt; </span><span class="mi">146</span> <span class="kn">from</span> <span class="nn">nltk.chunk</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span> <span class="kn">from</span> <span class="nn">nltk.classify</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="g g-Whitespace">    </span><span class="mi">148</span> <span class="kn">from</span> <span class="nn">nltk.inference</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Roaming</span>\<span class="n">Python</span>\<span class="n">Python310</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">nltk</span>\<span class="n">chunk</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">155</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Natural Language Toolkit: Chunkers</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Copyright (C) 2001-2023 NLTK Project</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># For license information, see LICENSE.TXT</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1">#</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span><span class="sd"> Classes and interfaces for identifying non-overlapping linguistic</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span><span class="sd"> groups (such as base noun phrases) in unrestricted text.  This task is</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">152</span><span class="sd">      pattern is valid.</span>
+<span class="g g-Whitespace">    </span><span class="mi">153</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">155</span> <span class="kn">from</span> <span class="nn">nltk.chunk.api</span> <span class="kn">import</span> <span class="n">ChunkParserI</span>
+<span class="g g-Whitespace">    </span><span class="mi">156</span> <span class="kn">from</span> <span class="nn">nltk.chunk.regexp</span> <span class="kn">import</span> <span class="n">RegexpChunkParser</span><span class="p">,</span> <span class="n">RegexpParser</span>
+<span class="g g-Whitespace">    </span><span class="mi">157</span> <span class="kn">from</span> <span class="nn">nltk.chunk.util</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">158</span>     <span class="n">ChunkScore</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">159</span>     <span class="n">accuracy</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">165</span>     <span class="n">tree2conlltags</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">166</span> <span class="p">)</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Roaming</span>\<span class="n">Python</span>\<span class="n">Python310</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">nltk</span>\<span class="n">chunk</span>\<span class="n">api</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">13</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Natural Language Toolkit: Chunk parsing API</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Copyright (C) 2001-2023 NLTK Project</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1">##  Chunk Parser Interface</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1">##//////////////////////////////////////////////////////</span>
+<span class="ne">---&gt; </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">nltk.chunk.util</span> <span class="kn">import</span> <span class="n">ChunkScore</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span> <span class="nn">nltk.internals</span> <span class="kn">import</span> <span class="n">deprecated</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="kn">from</span> <span class="nn">nltk.parse</span> <span class="kn">import</span> <span class="n">ParserI</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Roaming</span>\<span class="n">Python</span>\<span class="n">Python310</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">nltk</span>\<span class="n">chunk</span>\<span class="n">util</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">12</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">import</span> <span class="nn">re</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">nltk.metrics</span> <span class="kn">import</span> <span class="n">accuracy</span> <span class="k">as</span> <span class="n">_accuracy</span>
+<span class="ne">---&gt; </span><span class="mi">12</span> <span class="kn">from</span> <span class="nn">nltk.tag.mapping</span> <span class="kn">import</span> <span class="n">map_tag</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">nltk.tag.util</span> <span class="kn">import</span> <span class="n">str2tuple</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span> <span class="nn">nltk.tree</span> <span class="kn">import</span> <span class="n">Tree</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Roaming</span>\<span class="n">Python</span>\<span class="n">Python310</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">nltk</span>\<span class="n">tag</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">90</span>
+<span class="g g-Whitespace">     </span><span class="mi">88</span> <span class="kn">from</span> <span class="nn">nltk.tag.hmm</span> <span class="kn">import</span> <span class="n">HiddenMarkovModelTagger</span><span class="p">,</span> <span class="n">HiddenMarkovModelTrainer</span>
+<span class="g g-Whitespace">     </span><span class="mi">89</span> <span class="kn">from</span> <span class="nn">nltk.tag.senna</span> <span class="kn">import</span> <span class="n">SennaTagger</span><span class="p">,</span> <span class="n">SennaChunkTagger</span><span class="p">,</span> <span class="n">SennaNERTagger</span>
+<span class="ne">---&gt; </span><span class="mi">90</span> <span class="kn">from</span> <span class="nn">nltk.tag.mapping</span> <span class="kn">import</span> <span class="n">tagset_mapping</span><span class="p">,</span> <span class="n">map_tag</span>
+<span class="g g-Whitespace">     </span><span class="mi">91</span> <span class="kn">from</span> <span class="nn">nltk.tag.crf</span> <span class="kn">import</span> <span class="n">CRFTagger</span>
+<span class="g g-Whitespace">     </span><span class="mi">92</span> <span class="kn">from</span> <span class="nn">nltk.tag.perceptron</span> <span class="kn">import</span> <span class="n">PerceptronTagger</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1027,</span> in <span class="ni">_find_and_load</span><span class="nt">(name, import_)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1006,</span> in <span class="ni">_find_and_load_unlocked</span><span class="nt">(name, import_)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap&gt;:688,</span> in <span class="ni">_load_unlocked</span><span class="nt">(spec)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap_external&gt;:879,</span> in <span class="ni">exec_module</span><span class="nt">(self, module)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap_external&gt;:975,</span> in <span class="ni">get_code</span><span class="nt">(self, fullname)</span>
+
+<span class="nn">File &lt;frozen importlib._bootstrap_external&gt;:1074,</span> in <span class="ni">get_data</span><span class="nt">(self, path)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -3746,7 +3843,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan algoritma Logistic Regression</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 3 : Implementasi Algoritma Logistic Regression</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-data">Persiapan Data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data-model">Load Data Model</a></li>

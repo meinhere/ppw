@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan Algoritma Logistic Regression &#8212; JupyterBook Publish - PPW</title>
+    <title>Tugas 3 : Implementasi Algoritma Logistic Regression &#8212; JupyterBook Publish - PPW</title>
   
   
   
@@ -60,7 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tugas-3/main';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Pencarian dan Penambangan Web - Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online" href="../tugas-2/main.html" />
+    <link rel="next" title="Word Embedding" href="../word-embedding/eksplorasi.html" />
+    <link rel="prev" title="Tugas 2 : Membuat VSM yang berisi TF-IDF" href="../tugas-2/main.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,19 +179,24 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../tugas-1/main.html">Pencarian dan Penambangan Web - Tugas 1 : Crawling Berita Online</a></li>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Crawling &amp; Logistic Regression</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tugas-1/main.html">Tugas 1 : Crawling Berita Online</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../tugas-2/main.html">Pencarian dan Penambangan Web - Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tugas-2/main.html">Tugas 2 : Membuat VSM yang berisi TF-IDF</a></li>
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan Algoritma Logistic Regression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 3 : Implementasi Algoritma Logistic Regression</a></li>
 
 
 
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Word Embedding</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../word-embedding/eksplorasi.html">Word Embedding</a></li>
 </ul>
 
     </div>
@@ -376,7 +382,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan Algoritma Logistic Regression</h1>
+    <h1>Tugas 3 : Implementasi Algoritma Logistic Regression</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -386,7 +392,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan Algoritma Logistic Regression</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 3 : Implementasi Algoritma Logistic Regression</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-modeling">Proses Modeling</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load Data</a></li>
@@ -416,8 +422,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pencarian-dan-penambangan-web-tugas-3-implementasi-hasil-vsm-dengan-algoritma-logistic-regression">
-<h1>Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan Algoritma Logistic Regression<a class="headerlink" href="#pencarian-dan-penambangan-web-tugas-3-implementasi-hasil-vsm-dengan-algoritma-logistic-regression" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="tugas-3-implementasi-algoritma-logistic-regression">
+<h1>Tugas 3 : Implementasi Algoritma Logistic Regression<a class="headerlink" href="#tugas-3-implementasi-algoritma-logistic-regression" title="Link to this heading">#</a></h1>
 <p>Pada Tugas 3 ini diminta untuk melakukan proses pembuatan model dari data VSM yang telah dibuat sebelumnya menggunakan algoritma Logistic Regression.</p>
 <p>Dibuat Oleh:</p>
 <ul class="simple">
@@ -449,20 +455,6 @@ document.write(`
 
 <span class="c1"># save model</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># library untuk proses modeling</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;sklearn&#39;
 </pre></div>
 </div>
 </div>
@@ -2070,8 +2062,17 @@ weighted avg       0.95      0.95      0.95        20
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Pencarian dan Penambangan Web - Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online</p>
+        <p class="prev-next-title">Tugas 2 : Membuat VSM yang berisi TF-IDF</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../word-embedding/eksplorasi.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Word Embedding</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -2089,7 +2090,7 @@ weighted avg       0.95      0.95      0.95        20
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pencarian dan Penambangan Web - Tugas 3 : Implementasi hasil VSM dengan Algoritma Logistic Regression</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 3 : Implementasi Algoritma Logistic Regression</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#proses-modeling">Proses Modeling</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">Load Data</a></li>
