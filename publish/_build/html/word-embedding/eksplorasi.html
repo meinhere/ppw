@@ -435,36 +435,36 @@ document.write(`
 <p>Cara kerja dari Skip-gram adalah dengan <strong>membaca adanya kata target, maka dilakukan prediksi kata konteks di sekitarnya</strong>. Kata konteks didefinisikan sebagai kata yang mengelilingi kata target dalam ukuran kalimat yang tetap. Sehingga, akan dibuatkan sampel pelatihan dengan menggeser corpus teks dan membentuk pasangan (target, konteks).</p>
 <section id="representasi-setiap-kata-ke-dalam-bentuk-vektor">
 <h3>1. Representasi setiap kata ke dalam bentuk vektor<a class="headerlink" href="#representasi-setiap-kata-ke-dalam-bentuk-vektor" title="Link to this heading">#</a></h3>
-<p><img alt="image" src="https://hackmd.io/_uploads/rkPDoUzR0.png" /></p>
+<p><img alt="image" src="../_images/1.1_vector_distance.png" /></p>
 <p>Pada gambar diatas dapat dilihat bahwa kata “Achieve” dan “Success” sudah memiliki bentuk vektor (dalam gambar diberikan vektor dengan 3 elemen). Korelasi antara kata “Achieve” dan “Success” dapat diukur dari jarak antara kedua vektor.</p>
 <p>Dibawah ini contoh analogi penggunaan kedekatan antara kata dalam bentuk vektor. Terdapat 3 kata yang digunakan yaitu “Indonesia”, “ibukota”, “Jakarta”</p>
-<p>\begin{align*}
-vec(\text{ibukota}) &amp; = [3.02 \quad -0.93 \quad 1.82] \
-vec(\text{Indonesia}) &amp; = [1.22 \quad 0.34 \quad -3.82] \
+<p><span class="math notranslate nohighlight">\(\begin{align*}
+vec(\text{ibukota}) &amp; = [3.02 \quad -0.93 \quad 1.82] \\
+vec(\text{Indonesia}) &amp; = [1.22 \quad 0.34 \quad -3.82] \\ 
 vec(\text{Jakarta})  &amp; = [4.09 \quad -0.58 \quad 2.01]
-\end{align*}</p>
+\end{align*}\)</span></p>
 <p>Untuk mengetahui vektor ibukota Indonesia, maka vektor kata “ibukota” dapat dijumlahkan dengan vektor kata “Indonesia”.</p>
-<p>\begin{align*}
-vec(\text{ibukota}) + vec(\text{Indonesia}) &amp;= [3.02 \quad -0.93 \quad 1.82] + [1.22 \quad 0.34 \quad -3.82] \
-&amp;= [4.24 \quad -0.59 \quad -2.00]
-\end{align*}</p>
+<p><span class="math notranslate nohighlight">\(\begin{align*}
+    vec(\text{ibukota}) + vec(\text{Indonesia}) &amp;= [3.02 \quad -0.93 \quad 1.82] + [1.22 \quad 0.34 \quad -3.82] \\
+                                              &amp;= [4.24 \quad -0.59 \quad -2.00]
+\end{align*}\)</span></p>
 <p>Setelah dilakukan proses penjumlahan, maka didapatkan hasil bahwa vektor kata “ibukota” dan vektor kata “Indonesia” itu berdekatan dengan vektor kata “Jakarta”. Sehingga dapat disimpulkan bahwa ibukota dari Indonesia adalah Jakarta.</p>
-<p>\begin{align*}
-[4.24 \quad -0.59 \quad -2.00] &amp; \cong [4.09 \quad -0.58 \quad 2.01] \
+<p><span class="math notranslate nohighlight">\(\begin{align*} 
+[4.24 \quad -0.59 \quad -2.00] &amp; \cong [4.09 \quad -0.58 \quad 2.01] \\ 
 vec(\text{ibukota}) + vec(\text{Indonesia}) &amp; \cong vec(\text{Jakarta})
-\end{align*}</p>
+\end{align*}\)</span></p>
 </section>
 <section id="windows-size-c-dalam-skip-gram">
 <h3>2. Windows size C dalam Skip-Gram<a class="headerlink" href="#windows-size-c-dalam-skip-gram" title="Link to this heading">#</a></h3>
 <p>Windows size dalam Skip-Gram digunakan untuk menentukan jumlah kata konteks yang akan diambil dari kata target. Jika windows size <span class="math notranslate nohighlight">\(C = 1\)</span>, maka akan diambil satu kata disebelah kiri dan satu kata disebelah kanan dari kata target.</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/BJxR4pAzCR.png" /></p>
+<p><img alt="image" src="../_images/2.1_quote_ned_stark.png" /></p>
 <p>Contoh:
 <strong>Kata Target</strong> = passes
 <strong>Kata Konteks</strong> = (pass, who) &amp; (pass, the)</p>
 </section>
 <section id="struktur-skip-gram">
 <h3>3. Struktur Skip-Gram<a class="headerlink" href="#struktur-skip-gram" title="Link to this heading">#</a></h3>
-<p><img alt="image" src="https://hackmd.io/_uploads/BJ5g7DM0A.png" /></p>
+<p><img alt="image" src="../_images/3.1_word2vec_skip-gram.png" /></p>
 <p>Dengan menggunakan library Word2Vec kita dapat mengonversi setiap kata yang dipilih menjadi vektor. Setiap kata memiliki jumlah dimensi vektor yang telah ditentukan. Jika kita menentukan size = 3 maka kita mengisi nilai dari <span class="math notranslate nohighlight">\(N = 3\)</span>. Nilai dari <span class="math notranslate nohighlight">\(N\)</span> dapat kita isi sesuaikan dengan kebutuhan ukuran elemen pada vektor yang diinginkan.</p>
 <p>Corpus :
 <strong>“the man who passes the sentence should swing the sword”</strong></p>
@@ -686,25 +686,25 @@ model = Word2Vec(corpus, size=3, window=1)
 <section id="forward-propagation-matriks-bobot-input-dan-output-w-input-w-output">
 <h4>3.3 Forward Propagation: Matriks Bobot Input dan Output (<span class="math notranslate nohighlight">\(W_{input}\)</span>, <span class="math notranslate nohighlight">\(W_{output}\)</span>)<a class="headerlink" href="#forward-propagation-matriks-bobot-input-dan-output-w-input-w-output" title="Link to this heading">#</a></h4>
 <p>Dari bentuk one hot encoding yang diatas, kita akan mengubah dalam bentuk vektor yang dapat diukur kedekatan antar kata dengan menggunakan Word2Vec untuk mendapatkan <span class="math notranslate nohighlight">\(W_{input}\)</span> dan <span class="math notranslate nohighlight">\(W_{output}\)</span>.</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/B1X6meQR0.png" /></p>
+<p><img alt="image" src="../_images/3.2_embedding_matrix_input.png" /></p>
 <p>Pada gambar diatas bentuk vektor dari kata <strong>“passes”</strong> menjadi <span class="math notranslate nohighlight">\([0.1 \quad 0.2 \quad 0.7]\)</span> dan vektor kata <strong>“should”</strong> menjadi <span class="math notranslate nohighlight">\([-2 \quad 0.2 \quad 0.8]\)</span>. Dikarenakan menggunakan N = 3 maka hasil dari vektor yang dibentuk menjadi 3 elemen saja.</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/S11I4xm0A.png" /></p>
+<p><img alt="image" src="../_images/3.3_word2vec_3d.png" /></p>
 </section>
 <section id="forward-propagation-hidden-projection-layer-h">
 <h4>3.4 Forward Propagation: Hidden (Projection) Layer (<span class="math notranslate nohighlight">\(h\)</span>)<a class="headerlink" href="#forward-propagation-hidden-projection-layer-h" title="Link to this heading">#</a></h4>
 <p>Skip-Gram menggunakan konsep neural network yang menggunakan satu hidden layer. Dalam konsep Natural Language Prosessing hidden layer dapat disebut sebagai projection layer. Dikarenakan <span class="math notranslate nohighlight">\(h\)</span> itu sebenarnya <span class="math notranslate nohighlight">\(N-\)</span>dim projected vector dari one hot encoding dari input vektor</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/r1mBBx7RC.png" /></p>
+<p><img alt="image" src="../_images/3.4_skip-gram_lookup.png" /></p>
 <p><span class="math notranslate nohighlight">\(h\)</span> diperoleh dari proses mengalikan matriks bobot input layer (<span class="math notranslate nohighlight">\(W_{input}\)</span>) dengan <span class="math notranslate nohighlight">\(V-\)</span>dim input vektor.</p>
-<p>\begin{align*}
-h = W_{input}^T \cdot x  \in \mathbb{R}^{N}$
-\end{align*}</p>
+<p><span class="math notranslate nohighlight">\(\begin{align*}
+h = W_{input}^T \cdot x  \in \mathbb{R}^{N}
+\end{align*}\)</span></p>
 </section>
 <section id="forward-propagation-softmax-output-layer">
 <h4>3.5 Forward Propagation: Softmax Output Layer<a class="headerlink" href="#forward-propagation-softmax-output-layer" title="Link to this heading">#</a></h4>
 <p>Output layer berisi probabilitas dari semua kata unik dalam corpus (<span class="math notranslate nohighlight">\({V-}\)</span>dim). Untuk menentukan nilai probabilitas diperlukan kata konteks dan kata target, contohnya jika ingin mengukur probabilitas kata <span class="math notranslate nohighlight">\(A\)</span> dari kata target <span class="math notranslate nohighlight">\(B\)</span> maka dapat dinotasikan sebagai <span class="math notranslate nohighlight">\(p(A|B)\)</span>. Pada Skip-Gram kita dapat menggunakan notasi <span class="math notranslate nohighlight">\(p(w_{context}| w_{center})\)</span>. Untuk mencari probabilitas kata konteks dengan kata target, maka diperlukan fungsi aktivasi softmax.</p>
-<p>\begin{align*}
+<p><span class="math notranslate nohighlight">\(\begin{align*}
 p(w_{context}|w_{center}) = \frac{exp(W_{output_{(context)}} \cdot h)}{\sum^V_{i=1}exp(W_{output_{(i)}} \cdot h)} \in \mathbb{R}^{1}
-\end{align*}</p>
+\end{align*}\)</span></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(W_{output_{(i)}}\)</span> adalah nilai elemen vektor output dari kata ke-<span class="math notranslate nohighlight">\({i}\)</span> yang memiliki ukuran <span class="math notranslate nohighlight">\(1 \times N\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(W_{output_{context}}\)</span> adalah nilai elemen vektor output dari kata konteks yang juga memiliki ukuran <span class="math notranslate nohighlight">\(1 \times N\)</span></p></li>
@@ -713,21 +713,21 @@ p(w_{context}|w_{center}) = \frac{exp(W_{output_{(context)}} \cdot h)}{\sum^V_{i
 <li><p>Output yang dihasilkan adalah nilai skalar dengan ukuran (<span class="math notranslate nohighlight">\(1 \times 1\)</span>) yang memiliki probabilitas dengan rentang <span class="math notranslate nohighlight">\([0, 1]\)</span></p></li>
 </ul>
 <p>Proses ini akan melakukan perulangan sejumlah <span class="math notranslate nohighlight">\(V\)</span> kali sesuai dengan jumlah kata unik dalam corpus dengan kata target.</p>
-<p>\begin{align*}
-\left[\begin{array}{c} p(w_{1}|w_{center}) \ p(w_{2}|w_{center}) \ p(w_{3}|w_{center}) \ \vdots \ p(w_{V}|w_{center}) \end{array} \right] = \frac{exp(W_{output} \cdot h)}{\sum^V_{i=1}exp(W_{output_{(i)}} \cdot h)} \in \mathbb{R}^{V}
-\end{align*}</p>
+<p><span class="math notranslate nohighlight">\(\begin{align*}
+\left[\begin{array}{c} p(w_{1}|w_{center}) \\ p(w_{2}|w_{center}) \\ p(w_{3}|w_{center}) \\ \vdots \\ p(w_{V}|w_{center}) \end{array} \right] = \frac{exp(W_{output} \cdot h)}{\sum^V_{i=1}exp(W_{output_{(i)}} \cdot h)} \in \mathbb{R}^{V}
+\end{align*}\)</span></p>
 <p>Sehingga <span class="math notranslate nohighlight">\(W_{output}\)</span> yang memiliki ukuran (<span class="math notranslate nohighlight">\(V \times N\)</span>) akan dikalikan dengan <span class="math notranslate nohighlight">\(h\)</span> yang memiliki ukuran (<span class="math notranslate nohighlight">\(N \times 1\)</span>) sehingga menghasilkan dot product vector yang memiliki ukuran (<span class="math notranslate nohighlight">\(V \times 1\)</span>). Terakhir, dot product vector akan dimasukkan ke dalam fungsi aktivasi softmax.</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/H1j9pt7C0.png" /></p>
+<p><img alt="image" src="../_images/3.5_softmax_function.png" /></p>
 <p>Hasil nilai dari aktivasi softmax jika dijumlahkan semua akan bernilai <span class="math notranslate nohighlight">\(1\)</span>.</p>
 </section>
 <section id="backward-propagation-prediction-error">
 <h4>3.6 Backward Propagation: Prediction Error<a class="headerlink" href="#backward-propagation-prediction-error" title="Link to this heading">#</a></h4>
 <p>Skip-Gram model melakukan optimasi bobot matriks (<span class="math notranslate nohighlight">\(\theta\)</span>) dengan mengurangi prediction error. Prediction error merupakan perbedaan antara hasil dari softmax output layer (<span class="math notranslate nohighlight">\(y_{pred}\)</span>) dengan probabilitas target yang sebenarnya (<span class="math notranslate nohighlight">\(y_{true}\)</span>) dari setiap kata. <span class="math notranslate nohighlight">\(y_{true}\)</span> merupakan vektor one hot encoder dari setiap kata konteks.</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/H1-Q-bSC0.png" /></p>
+<p><img alt="image" src="../_images/3.6_error_window.png" /></p>
 <p>Pada gambar di atas, terdapat 2 kata yaitu <strong>“the”</strong> dan <strong>“who”</strong> yang telah memiliki hasil dari pengurangan <span class="math notranslate nohighlight">\(y_{pred}\)</span> dan <span class="math notranslate nohighlight">\(y_{true}\)</span>. Selanjutnya dilakukan penjumlahan untuk melihat bobot yang kemudian akan dimasukkan/diupdate pada matriks bobot yang ada.</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/HJSKfWSCC.png" /></p>
+<p><img alt="image" src="../_images/3.7_prediction_error_sum.png" /></p>
 <p>Update matriks bobot terus dilakukan hingga mendapatkan prediction error paling kecil.</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/rkY3M-rA0.png" /></p>
+<p><img alt="image" src="../_images/3.8_pred_opt.png" /></p>
 </section>
 </section>
 <section id="demonstrasi-perhitungan">
@@ -735,45 +735,45 @@ p(w_{context}|w_{center}) = \frac{exp(W_{output_{(context)}} \cdot h)}{\sum^V_{i
 <section id="mencari-nilai-hidden-layer-h">
 <h4>4.1 Mencari nilai hidden layer (<span class="math notranslate nohighlight">\(h\)</span>)<a class="headerlink" href="#mencari-nilai-hidden-layer-h" title="Link to this heading">#</a></h4>
 <p>Dalam contoh ini kita akan menggunakan kata target <strong>“passes”</strong> dengan nilai windows size <span class="math notranslate nohighlight">\(C = 1\)</span>, sehingga mendapatkan kata konteks yaitu <strong>“the”</strong> dan <strong>“who”</strong>. Selanjutnya dicarilah nilai dari hidden layer (<span class="math notranslate nohighlight">\(h\)</span>) dari matriks bobot input (<span class="math notranslate nohighlight">\(W_{input}\)</span>).</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/Hk3FTlr0C.png" /></p>
+<p><img alt="image" src="../_images/4.1_forward_1.png" /></p>
 </section>
 <section id="menghitung-output-layer-dengan-fungsi-aktivasi-softmax">
 <h4>4.2 Menghitung output layer dengan fungsi aktivasi softmax<a class="headerlink" href="#menghitung-output-layer-dengan-fungsi-aktivasi-softmax" title="Link to this heading">#</a></h4>
 <p>Pertama perlu dilakukan perkalian antara hidden layer (<span class="math notranslate nohighlight">\(h\)</span>) dengan matriks output layer (<span class="math notranslate nohighlight">\(W_{output}\)</span>). Setelah itu baru dilakukan proses perhitungan dengan fungsi aktivasi softmax.</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/SybWJZS0C.png" /></p>
+<p><img alt="image" src="../_images/4.2_forward_2.png" /></p>
 </section>
 <section id="menjumlahkan-prediction-error-dari-kata-konteks">
 <h4>4.3 Menjumlahkan prediction error dari kata konteks<a class="headerlink" href="#menjumlahkan-prediction-error-dari-kata-konteks" title="Link to this heading">#</a></h4>
 <p>Berhubung windows size <span class="math notranslate nohighlight">\(C = 1\)</span> maka hanya terdapat 2 nilai error yang akan dijumlahkan yaitu nilai error dari kata <strong>“the”</strong> dan <strong>“who”</strong>.</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/rkEVn4SRR.png" /></p>
+<p><img alt="image" src="../_images/4.3_backward_1.png" /></p>
 </section>
 <section id="mengitung-nabla-w-input">
 <h4>4.4 Mengitung <span class="math notranslate nohighlight">\(\nabla W_{input}\)</span><a class="headerlink" href="#mengitung-nabla-w-input" title="Link to this heading">#</a></h4>
 <p>Diperlukan rumus (<span class="math notranslate nohighlight">\(\frac{\partial J}{\partial W_{input}}\)</span>) yang dapat direpresentasikan juga dengan cara mengalikan vektor one hot encoding dari input layer (<span class="math notranslate nohighlight">\(x\)</span>) dengan <span class="math notranslate nohighlight">\(W_{output}^T \sum^C_{c=1} e_c\)</span>. Rumus <span class="math notranslate nohighlight">\(W_{output}^T \sum^C_{c=1} e_c\)</span> merupakan hasil perkalian antara (<span class="math notranslate nohighlight">\(W_{output}\)</span>) dengan penjumlahan prediction error (<span class="math notranslate nohighlight">\(\sum^C_{c=1} e_c\)</span>).</p>
-<p>\begin{align*}
+<p><span class="math notranslate nohighlight">\(\begin{align*}
 \frac{\partial J}{\partial W_{input}}  = x \cdot (W_{output}^T \sum^C_{c=1} e_c)
-\end{align*}</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/r18zAErR0.png" /></p>
+\end{align*}\)</span></p>
+<p><img alt="image" src="../_images/4.4_backward_2.png" /></p>
 </section>
 <section id="menghitung-nabla-w-output">
 <h4>4.5 Menghitung <span class="math notranslate nohighlight">\(\nabla W_{output}\)</span><a class="headerlink" href="#menghitung-nabla-w-output" title="Link to this heading">#</a></h4>
 <p>Diperlukan rumus (<span class="math notranslate nohighlight">\(\frac{\partial J}{\partial W_{output}}\)</span>) yang dapat direprenstasikan juga dengan cara mengalikan hidden layer (<span class="math notranslate nohighlight">\(h\)</span>) dengan penjumlahan prediction error (<span class="math notranslate nohighlight">\(\sum^C_{c=1} e_c\)</span>). Tidak sama dengan matriks bobot input (<span class="math notranslate nohighlight">\(W_{input}\)</span>) yang hanya mengupdate satu nilai vektor, tetapi semua nilai vektor pada matriks bobot output (<span class="math notranslate nohighlight">\(W_{output}\)</span>) akan diperbarui.</p>
-<p>\begin{align*}
+<p><span class="math notranslate nohighlight">\(\begin{align*}
 \frac{\partial J}{\partial W_{output}} = h \cdot \sum^C_{c=1} e_c
-\end{align*}</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/HyYJbSB00.png" /></p>
+\end{align*}\)</span></p>
+<p><img alt="image" src="../_images/4.5_backward_3.png" /></p>
 </section>
 <section id="memperbarui-matriks-bobot-input-dan-output">
 <h4>4.6 Memperbarui matriks bobot input dan output<a class="headerlink" href="#memperbarui-matriks-bobot-input-dan-output" title="Link to this heading">#</a></h4>
 <p>Matriks bobot input dan output akan diperbarui menggunakan rumus</p>
-<p>\begin{align*}
+<p><span class="math notranslate nohighlight">\(\begin{align*}
 W_{input}^{(new)}=W_{input}^{(old)}- \eta \cdot x \cdot (W_{output}^T \sum^C_{c=1} e_c)
-\end{align*}</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/BkiRWHr0C.png" /></p>
-<p>\begin{align*}
+\end{align*}\)</span></p>
+<p><img alt="image" src="../_images/4.6_backward_4.png" /></p>
+<p><span class="math notranslate nohighlight">\(\begin{align*}
 W_{output}^{(new)}=W_{output}^{(old)}- \eta \cdot h \cdot \sum^C_{c=1} e_c
-\end{align*}</p>
-<p><img alt="image" src="https://hackmd.io/_uploads/HyWyMSrCA.png" /></p>
+\end{align*}\)</span></p>
+<p><img alt="image" src="../_images/4.7_backward_5.png" /></p>
 </section>
 </section>
 </section>
