@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Tugas 3 : Implementasi Algoritma Logistic Regression &#8212; JupyterBook Publish - PPW</title>
+    <title>Tugas 3.2 : Uji Coba Model Logistic Regression &#8212; JupyterBook Publish - PPW</title>
   
   
   
@@ -60,6 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tugas-3/testing';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tugas 4.1 : Mencari Keterkaitan antar Berita" href="../tugas-4/centrality.html" />
+    <link rel="prev" title="Tugas 3.1 : Implementasi Algoritma Logistic Regression" href="main.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -122,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,19 +180,19 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Crawling &amp; Logistic Regression</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../tugas-1/main.html">Tugas 1 : Crawling Berita Online</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="../tugas-2/main.html">Tugas 2 : Membuat VSM yang berisi TF-IDF</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="main.html">Tugas 3 : Implementasi Algoritma Logistic Regression</a></li>
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="../tugas-2/main.html">Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">Tugas 3.1 : Implementasi Algoritma Logistic Regression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 3.2 : Uji Coba Model Logistic Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Centrality</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tugas-4/centrality.html">Tugas 4.1 : Mencari Keterkaitan antar Berita</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Keyword Extraction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tugas-uts/main.html">Tugas UTS : Melakukan Keyword Extraction pada Berita</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Word Embedding</span></p>
 <ul class="nav bd-sidenav">
@@ -382,7 +382,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Tugas 3 : Implementasi Algoritma Logistic Regression</h1>
+    <h1>Tugas 3.2 : Uji Coba Model Logistic Regression</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -392,12 +392,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 3 : Implementasi Algoritma Logistic Regression</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-data">Persiapan Data</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data-model">Load Data Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-fungsi-untuk-persiapan-crawling">Membuat Fungsi untuk Persiapan Crawling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengambilan-data-baru">Pengambilan Data Baru</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-data">Persiapan Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data-model">Load Data Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-fungsi-untuk-persiapan-crawling">Membuat Fungsi untuk Persiapan Crawling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengambilan-data-baru">Pengambilan Data Baru</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#praproses-teks">Praproses Teks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-fungsi">Membuat Fungsi</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clean-lower">Clean Lower</a></li>
@@ -408,15 +409,12 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembuatan-vsm">Pembuatan VSM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-data">Preparing Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-data-test">Preparing Data Test</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encode-label">Encode Label</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-data">Testing Data</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-data">Testing Data</a></li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -427,19 +425,19 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="tugas-3-implementasi-algoritma-logistic-regression">
-<h1>Tugas 3 : Implementasi Algoritma Logistic Regression<a class="headerlink" href="#tugas-3-implementasi-algoritma-logistic-regression" title="Link to this heading">#</a></h1>
-<p>Pada Tugas 3 ini diminta untuk melakukan proses pembuatan model dari data VSM yang telah dibuat sebelumnya menggunakan algoritma Logistic Regression.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="tugas-3-2-uji-coba-model-logistic-regression">
+<h1>Tugas 3.2 : Uji Coba Model Logistic Regression<a class="headerlink" href="#tugas-3-2-uji-coba-model-logistic-regression" title="Link to this heading">#</a></h1>
+<p>Pada Tugas 3.2 ini diminta untuk melakukan uji coba model yang telah dibuat dengan algoritma Logistic Regression.</p>
 <p>Dibuat Oleh:</p>
 <ul class="simple">
 <li><p>Nama : Sabil Ahmad Hidayat</p></li>
 <li><p>NIM : 220411100058</p></li>
 <li><p>Kelas : PPW A</p></li>
 </ul>
-<p>Link Projek : <a class="github reference external" href="https://github.com/meinhere/ppw">meinhere/ppw</a></p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="import-library">
-<h1>Import Library<a class="headerlink" href="#import-library" title="Link to this heading">#</a></h1>
+<p>Link Code : <a class="reference external" href="https://colab.research.google.com/drive/1UBJt_jNWAnwp-Jhg_McgcuYY6zahVKLW?usp=sharing">https://colab.research.google.com/drive/1UBJt_jNWAnwp-Jhg_McgcuYY6zahVKLW?usp=sharing</a></p>
+<p>Link Github : <a class="github reference external" href="https://github.com/meinhere/ppw/tree/master/publish/tugas-3">meinhere/ppw</a></p>
+<section id="import-library">
+<h2>Import Library<a class="headerlink" href="#import-library" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-q<span class="w"> </span>Sastrawi
@@ -492,88 +490,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1"># library untuk praproses teks</span>
-<span class="ne">---&gt; </span><span class="mi">14</span> <span class="kn">import</span> <span class="nn">nltk</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">)</span>
-
-<span class="n">File</span> <span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Roaming</span>\<span class="n">Python</span>\<span class="n">Python310</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">nltk</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">146</span>
-<span class="g g-Whitespace">    </span><span class="mi">140</span> <span class="kn">from</span> <span class="nn">nltk.jsontags</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span> <span class="c1">###########################################################</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span> <span class="c1"># PACKAGES</span>
-<span class="g g-Whitespace">    </span><span class="mi">144</span> <span class="c1">###########################################################</span>
-<span class="ne">--&gt; </span><span class="mi">146</span> <span class="kn">from</span> <span class="nn">nltk.chunk</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="g g-Whitespace">    </span><span class="mi">147</span> <span class="kn">from</span> <span class="nn">nltk.classify</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="g g-Whitespace">    </span><span class="mi">148</span> <span class="kn">from</span> <span class="nn">nltk.inference</span> <span class="kn">import</span> <span class="o">*</span>
-
-<span class="n">File</span> <span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Roaming</span>\<span class="n">Python</span>\<span class="n">Python310</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">nltk</span>\<span class="n">chunk</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">155</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Natural Language Toolkit: Chunkers</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Copyright (C) 2001-2023 NLTK Project</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># For license information, see LICENSE.TXT</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1">#</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span><span class="sd"> Classes and interfaces for identifying non-overlapping linguistic</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span><span class="sd"> groups (such as base noun phrases) in unrestricted text.  This task is</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">152</span><span class="sd">      pattern is valid.</span>
-<span class="g g-Whitespace">    </span><span class="mi">153</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">155</span> <span class="kn">from</span> <span class="nn">nltk.chunk.api</span> <span class="kn">import</span> <span class="n">ChunkParserI</span>
-<span class="g g-Whitespace">    </span><span class="mi">156</span> <span class="kn">from</span> <span class="nn">nltk.chunk.regexp</span> <span class="kn">import</span> <span class="n">RegexpChunkParser</span><span class="p">,</span> <span class="n">RegexpParser</span>
-<span class="g g-Whitespace">    </span><span class="mi">157</span> <span class="kn">from</span> <span class="nn">nltk.chunk.util</span> <span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">158</span>     <span class="n">ChunkScore</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">159</span>     <span class="n">accuracy</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">165</span>     <span class="n">tree2conlltags</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">166</span> <span class="p">)</span>
-
-<span class="n">File</span> <span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Roaming</span>\<span class="n">Python</span>\<span class="n">Python310</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">nltk</span>\<span class="n">chunk</span>\<span class="n">api</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">13</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Natural Language Toolkit: Chunk parsing API</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># Copyright (C) 2001-2023 NLTK Project</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1">##  Chunk Parser Interface</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1">##//////////////////////////////////////////////////////</span>
-<span class="ne">---&gt; </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">nltk.chunk.util</span> <span class="kn">import</span> <span class="n">ChunkScore</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span> <span class="nn">nltk.internals</span> <span class="kn">import</span> <span class="n">deprecated</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="kn">from</span> <span class="nn">nltk.parse</span> <span class="kn">import</span> <span class="n">ParserI</span>
-
-<span class="n">File</span> <span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Roaming</span>\<span class="n">Python</span>\<span class="n">Python310</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">nltk</span>\<span class="n">chunk</span>\<span class="n">util</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">12</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">import</span> <span class="nn">re</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">nltk.metrics</span> <span class="kn">import</span> <span class="n">accuracy</span> <span class="k">as</span> <span class="n">_accuracy</span>
-<span class="ne">---&gt; </span><span class="mi">12</span> <span class="kn">from</span> <span class="nn">nltk.tag.mapping</span> <span class="kn">import</span> <span class="n">map_tag</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span> <span class="nn">nltk.tag.util</span> <span class="kn">import</span> <span class="n">str2tuple</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span> <span class="nn">nltk.tree</span> <span class="kn">import</span> <span class="n">Tree</span>
-
-<span class="n">File</span> <span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Roaming</span>\<span class="n">Python</span>\<span class="n">Python310</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">nltk</span>\<span class="n">tag</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">90</span>
-<span class="g g-Whitespace">     </span><span class="mi">88</span> <span class="kn">from</span> <span class="nn">nltk.tag.hmm</span> <span class="kn">import</span> <span class="n">HiddenMarkovModelTagger</span><span class="p">,</span> <span class="n">HiddenMarkovModelTrainer</span>
-<span class="g g-Whitespace">     </span><span class="mi">89</span> <span class="kn">from</span> <span class="nn">nltk.tag.senna</span> <span class="kn">import</span> <span class="n">SennaTagger</span><span class="p">,</span> <span class="n">SennaChunkTagger</span><span class="p">,</span> <span class="n">SennaNERTagger</span>
-<span class="ne">---&gt; </span><span class="mi">90</span> <span class="kn">from</span> <span class="nn">nltk.tag.mapping</span> <span class="kn">import</span> <span class="n">tagset_mapping</span><span class="p">,</span> <span class="n">map_tag</span>
-<span class="g g-Whitespace">     </span><span class="mi">91</span> <span class="kn">from</span> <span class="nn">nltk.tag.crf</span> <span class="kn">import</span> <span class="n">CRFTagger</span>
-<span class="g g-Whitespace">     </span><span class="mi">92</span> <span class="kn">from</span> <span class="nn">nltk.tag.perceptron</span> <span class="kn">import</span> <span class="n">PerceptronTagger</span>
-
-<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1027,</span> in <span class="ni">_find_and_load</span><span class="nt">(name, import_)</span>
-
-<span class="nn">File &lt;frozen importlib._bootstrap&gt;:1006,</span> in <span class="ni">_find_and_load_unlocked</span><span class="nt">(name, import_)</span>
-
-<span class="nn">File &lt;frozen importlib._bootstrap&gt;:688,</span> in <span class="ni">_load_unlocked</span><span class="nt">(spec)</span>
-
-<span class="nn">File &lt;frozen importlib._bootstrap_external&gt;:879,</span> in <span class="ni">exec_module</span><span class="nt">(self, module)</span>
-
-<span class="nn">File &lt;frozen importlib._bootstrap_external&gt;:975,</span> in <span class="ni">get_code</span><span class="nt">(self, fullname)</span>
-
-<span class="nn">File &lt;frozen importlib._bootstrap_external&gt;:1074,</span> in <span class="ni">get_data</span><span class="nt">(self, path)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
-</div>
 </div>
 <p><strong>preprocessing</strong> disini digunakan untuk melakukan proses encoding pada label</p>
 <p><strong>train_test_split</strong> digunakan untuk membagi dataset menjadi data training dan testing</p>
@@ -582,10 +498,10 @@ document.write(`
 <p><strong>matplotlib</strong> dan <strong>seaborn</strong> digunakan untuk plotting grafik</p>
 <p><strong>pickle</strong> digunakan untuk menyimpan model hasil training dan testing</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="persiapan-data">
-<h1>Persiapan Data<a class="headerlink" href="#persiapan-data" title="Link to this heading">#</a></h1>
+<section id="persiapan-data">
+<h2>Persiapan Data<a class="headerlink" href="#persiapan-data" title="Link to this heading">#</a></h2>
 <section id="load-data-model">
-<h2>Load Data Model<a class="headerlink" href="#load-data-model" title="Link to this heading">#</a></h2>
+<h3>Load Data Model<a class="headerlink" href="#load-data-model" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">main_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/meinhere/ppw/master/publish/tugas-2/data_berita.csv&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
@@ -595,7 +511,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-44b49604-16dc-4d8a-aee1-7cd700877440" class="colab-df-container">
+  <div id="df-f5c1fca2-7eaf-4a4f-b4ff-1f828619419a" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -717,7 +633,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-44b49604-16dc-4d8a-aee1-7cd700877440')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-f5c1fca2-7eaf-4a4f-b4ff-1f828619419a')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -769,12 +685,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-44b49604-16dc-4d8a-aee1-7cd700877440 button.colab-df-convert');
+        document.querySelector('#df-f5c1fca2-7eaf-4a4f-b4ff-1f828619419a button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-44b49604-16dc-4d8a-aee1-7cd700877440');
+        const element = document.querySelector('#df-f5c1fca2-7eaf-4a4f-b4ff-1f828619419a');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -794,8 +710,8 @@ document.write(`
   </div>
 
 
-<div id="df-c6a3b2b4-e42e-4252-9c21-86664c1aa210">
-  <button class="colab-df-quickchart" onclick="quickchart('df-c6a3b2b4-e42e-4252-9c21-86664c1aa210')"
+<div id="df-f8e889c8-6ddf-408a-bf21-54dfdce00779">
+  <button class="colab-df-quickchart" onclick="quickchart('df-f8e889c8-6ddf-408a-bf21-54dfdce00779')"
             title="Suggest charts"
             style="display:none;">
 
@@ -914,14 +830,14 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-c6a3b2b4-e42e-4252-9c21-86664c1aa210 button');
+        document.querySelector('#df-f8e889c8-6ddf-408a-bf21-54dfdce00779 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_a34fedbb-b220-4910-8e15-56dfd70227e1">
+  <div id="id_95e2ecb6-be92-4896-bd64-d8035ab310af">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -965,7 +881,7 @@ document.write(`
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_a34fedbb-b220-4910-8e15-56dfd70227e1 button.colab-df-generate');
+        document.querySelector('#id_95e2ecb6-be92-4896-bd64-d8035ab310af button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -982,7 +898,7 @@ document.write(`
 </div>
 </section>
 <section id="membuat-fungsi-untuk-persiapan-crawling">
-<h2>Membuat Fungsi untuk Persiapan Crawling<a class="headerlink" href="#membuat-fungsi-untuk-persiapan-crawling" title="Link to this heading">#</a></h2>
+<h3>Membuat Fungsi untuk Persiapan Crawling<a class="headerlink" href="#membuat-fungsi-untuk-persiapan-crawling" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fungsi untuk mengambil link yang akan dilakukan crawling</span>
@@ -1078,7 +994,7 @@ document.write(`
 <p>function <strong>get_content</strong> digunakan untuk melakukan proses pembuatan isi berita sesuai link berita yang dicari.</p>
 </section>
 <section id="pengambilan-data-baru">
-<h2>Pengambilan Data Baru<a class="headerlink" href="#pengambilan-data-baru" title="Link to this heading">#</a></h2>
+<h3>Pengambilan Data Baru<a class="headerlink" href="#pengambilan-data-baru" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">title_old</span> <span class="o">=</span> <span class="n">main_df</span><span class="p">[</span><span class="s2">&quot;Judul Berita&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
@@ -1088,49 +1004,43 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 1: 100%|██████████| 15/15 [00:04&lt;00:00,  3.06it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 1: 100%|██████████| 15/15 [00:06&lt;00:00,  2.50it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 2 | Otomotif: 2 | Total: 4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 3 | Otomotif: 0 | Total: 3
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 2: 100%|██████████| 15/15 [00:01&lt;00:00,  7.69it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 2: 100%|██████████| 15/15 [00:03&lt;00:00,  4.84it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 0 | Total: 5
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 3: 100%|██████████| 15/15 [00:02&lt;00:00,  5.73it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 1 | Total: 6
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 4: 100%|██████████| 15/15 [00:00&lt;00:00, 15.34it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 2 | Total: 7
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 3: 100%|██████████| 15/15 [00:00&lt;00:00, 76.12it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 5: 100%|██████████| 15/15 [00:01&lt;00:00, 12.93it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 3 | Total: 8
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 4: 100%|██████████| 15/15 [00:00&lt;00:00, 59409.41it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 3 | Total: 8
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 5: 100%|██████████| 15/15 [00:00&lt;00:00, 60669.78it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 3 | Total: 8
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 6: 100%|██████████| 15/15 [00:00&lt;00:00, 58.51it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 6: 100%|██████████| 15/15 [00:01&lt;00:00, 10.13it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 4 | Total: 9
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 7: 100%|██████████| 15/15 [00:00&lt;00:00, 59634.65it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 4 | Total: 9
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 8: 100%|██████████| 15/15 [00:00&lt;00:00, 125.20it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 7: 100%|██████████| 15/15 [00:01&lt;00:00,  9.23it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 5 | Total: 10
@@ -1150,7 +1060,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-0847a63f-9b33-46cd-9a97-ca49c52664fb" class="colab-df-container">
+  <div id="df-634c20bc-01f9-42bf-b622-7484e8a02152" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1180,81 +1090,81 @@ document.write(`
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>Tupperware Ajukan Bangkrut, Imbas Permintaan T...</td>
-      <td>JAKARTA, KOMPAS.com - Perusahaan yang memprodu...</td>
-      <td>18/09/2024</td>
+      <td>Dana Kelolaan Reksa Dana BRI Gamasteps Tembus ...</td>
+      <td>JAKARTA, KOMPAS.com - Reksa dana pasar uang BR...</td>
+      <td>16/10/2024</td>
       <td>MONEY</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>Strategi Jobstreet Siapkan 1 Juta Lowongan Kerja</td>
-      <td>JAKARTA, KOMPAS.com - Platform ketenagakerjaan...</td>
-      <td>18/09/2024</td>
+      <td>Pelanggaran Aturan Wajib SNI, Kemenperin: Sank...</td>
+      <td>JAKARTA, KOMPAS.com - Kepala Pusat Pengawasan ...</td>
+      <td>16/10/2024</td>
       <td>MONEY</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>Promo Tiket Bus DAMRI Beli 3 Gratis 1, Simak W...</td>
-      <td>JAKARTA, KOMPAS.com – Dalam rangka memperingat...</td>
-      <td>18/09/2024</td>
-      <td>OTOMOTIF</td>
+      <td>Mark Dynamics Catat Penjualan Naik 173 Persen ...</td>
+      <td>JAKARTA, KOMPAS.com - Emiten produsen sarung t...</td>
+      <td>16/10/2024</td>
+      <td>MONEY</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>Begini Cara Bayar Pajak Kendaraan yang Masih K...</td>
-      <td>JAKARTA, KOMPAS.com - Setiap pemilik kendaraan...</td>
-      <td>18/09/2024</td>
-      <td>OTOMOTIF</td>
+      <td>Produksi Beras 2024 Diprediksi Turun, Ini Peny...</td>
+      <td>JAKARTA, KOMPAS.com - Kementerian Pertanian (K...</td>
+      <td>16/10/2024</td>
+      <td>MONEY</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>Apa Itu Pasar Modal: Pengertian, Fungsi, Jenis...</td>
-      <td>JAKARTA, KOMPAS.com - Pasar modal memegang per...</td>
-      <td>18/09/2024</td>
+      <td>Per Hari Ini, KA Jayabaya Pakai Rangkaian Stai...</td>
+      <td>KOMPAS.com - Kereta api (KA) Jayabaya rute Mal...</td>
+      <td>16/10/2024</td>
       <td>MONEY</td>
     </tr>
     <tr>
       <th>5</th>
       <td>6</td>
-      <td>Bandung Diguncang 8 Kali Gempa, KCIC Periksa S...</td>
-      <td>JAKARTA, KOMPAS.com - PT KCIC menyampaikan per...</td>
-      <td>18/09/2024</td>
-      <td>MONEY</td>
+      <td>Hitung Biaya Servis Honda Stylo 160 CBS</td>
+      <td>JAKARTA, KOMPAS.com – Honda Stylo 160 CBS seca...</td>
+      <td>16/10/2024</td>
+      <td>OTOMOTIF</td>
     </tr>
     <tr>
       <th>6</th>
       <td>7</td>
-      <td>Pelabuhan Tuas, Proyek Reklamasi Singapura yan...</td>
-      <td>KOMPAS.com - Negara tetangga Indonesia di sebe...</td>
-      <td>18/09/2024</td>
-      <td>MONEY</td>
+      <td>Tidak Boleh Sembarangan, Begini Prosedur Razia...</td>
+      <td>JAKARTA, KOMPAS.com – Razia lalu lintas merupa...</td>
+      <td>16/10/2024</td>
+      <td>OTOMOTIF</td>
     </tr>
     <tr>
       <th>7</th>
       <td>8</td>
-      <td>Benarkah Oli Habis Bisa Bikin Motor Mogok di J...</td>
-      <td>KLATEN, KOMPAS.com - Motor mogok karena kehabi...</td>
-      <td>18/09/2024</td>
+      <td>Hitung Konsumsi BBM Honda Stylo 160 CBS, Tembu...</td>
+      <td>JAKARTA, KOMPAS.com – Honda Stylo 160 CBS meru...</td>
+      <td>16/10/2024</td>
       <td>OTOMOTIF</td>
     </tr>
     <tr>
       <th>8</th>
       <td>9</td>
-      <td>Jack Miller Diduga Isi Bangku Pramac Yamaha Mu...</td>
-      <td>JAKARTA, KOMPAS.com - Pebalap Red Bull KTM Jac...</td>
-      <td>18/09/2024</td>
+      <td>Spesifikasi Lengkap Yamaha Grand Filano, Mesin...</td>
+      <td>JAKARTA, KOMPAS.com - Yamaha Grand Filano jadi...</td>
+      <td>16/10/2024</td>
       <td>OTOMOTIF</td>
     </tr>
     <tr>
       <th>9</th>
       <td>10</td>
-      <td>Jumlah Penumpang DAMRI Tembus 58.000 Orang sel...</td>
-      <td>JAKARTA, KOMPAS.com – DAMRI mencatat jumlah pe...</td>
-      <td>18/09/2024</td>
+      <td>Mobil Presiden Mercedes-Benz S600 Guard dan S6...</td>
+      <td>JAKARTA, KOMPAS.com - Mobil dinas Presiden RI ...</td>
+      <td>16/10/2024</td>
       <td>OTOMOTIF</td>
     </tr>
   </tbody>
@@ -1263,7 +1173,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-0847a63f-9b33-46cd-9a97-ca49c52664fb')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-634c20bc-01f9-42bf-b622-7484e8a02152')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1315,12 +1225,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-0847a63f-9b33-46cd-9a97-ca49c52664fb button.colab-df-convert');
+        document.querySelector('#df-634c20bc-01f9-42bf-b622-7484e8a02152 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-0847a63f-9b33-46cd-9a97-ca49c52664fb');
+        const element = document.querySelector('#df-634c20bc-01f9-42bf-b622-7484e8a02152');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1340,8 +1250,8 @@ document.write(`
   </div>
 
 
-<div id="df-36112c89-3e54-4a97-b143-d99a14497b8e">
-  <button class="colab-df-quickchart" onclick="quickchart('df-36112c89-3e54-4a97-b143-d99a14497b8e')"
+<div id="df-6915acc6-bc4b-4094-96f6-b40b3bbb0384">
+  <button class="colab-df-quickchart" onclick="quickchart('df-6915acc6-bc4b-4094-96f6-b40b3bbb0384')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1460,14 +1370,14 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-36112c89-3e54-4a97-b143-d99a14497b8e button');
+        document.querySelector('#df-6915acc6-bc4b-4094-96f6-b40b3bbb0384 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_a63597f6-92da-4f7b-803b-4ed59568036e">
+  <div id="id_0e20c029-23e2-4c69-a126-8c727c17cef0">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -1511,7 +1421,7 @@ document.write(`
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_a63597f6-92da-4f7b-803b-4ed59568036e button.colab-df-generate');
+        document.querySelector('#id_0e20c029-23e2-4c69-a126-8c727c17cef0 button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -1526,6 +1436,7 @@ document.write(`
   </div>
 </div></div>
 </div>
+</section>
 </section>
 <section id="praproses-teks">
 <h2>Praproses Teks<a class="headerlink" href="#praproses-teks" title="Link to this heading">#</a></h2>
@@ -1593,7 +1504,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-9513f8a3-7b9c-4b32-b37a-e2f9da2ace46" class="colab-df-container">
+  <div id="df-68ebe307-3685-4dec-ba87-6c16a8da7a4a" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1618,43 +1529,43 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>jakarta, kompas.com - perusahaan yang memprodu...</td>
+      <td>jakarta, kompas.com - reksa dana pasar uang br...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>jakarta, kompas.com - platform ketenagakerjaan...</td>
+      <td>jakarta, kompas.com - kepala pusat pengawasan ...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>jakarta, kompas.com – dalam rangka memperingat...</td>
+      <td>jakarta, kompas.com - emiten produsen sarung t...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>jakarta, kompas.com - setiap pemilik kendaraan...</td>
+      <td>jakarta, kompas.com - kementerian pertanian (k...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>jakarta, kompas.com - pasar modal memegang per...</td>
+      <td>kompas.com - kereta api (ka) jayabaya rute mal...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>jakarta, kompas.com - pt kcic menyampaikan per...</td>
+      <td>jakarta, kompas.com – honda stylo 160 cbs seca...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>kompas.com - negara tetangga indonesia di sebe...</td>
+      <td>jakarta, kompas.com – razia lalu lintas merupa...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>klaten, kompas.com - motor mogok karena kehabi...</td>
+      <td>jakarta, kompas.com – honda stylo 160 cbs meru...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>jakarta, kompas.com - pebalap red bull ktm jac...</td>
+      <td>jakarta, kompas.com - yamaha grand filano jadi...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>jakarta, kompas.com – damri mencatat jumlah pe...</td>
+      <td>jakarta, kompas.com - mobil dinas presiden ri ...</td>
     </tr>
   </tbody>
 </table>
@@ -1662,7 +1573,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-9513f8a3-7b9c-4b32-b37a-e2f9da2ace46')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-68ebe307-3685-4dec-ba87-6c16a8da7a4a')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1714,12 +1625,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-9513f8a3-7b9c-4b32-b37a-e2f9da2ace46 button.colab-df-convert');
+        document.querySelector('#df-68ebe307-3685-4dec-ba87-6c16a8da7a4a button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-9513f8a3-7b9c-4b32-b37a-e2f9da2ace46');
+        const element = document.querySelector('#df-68ebe307-3685-4dec-ba87-6c16a8da7a4a');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1739,8 +1650,8 @@ document.write(`
   </div>
 
 
-<div id="df-0a2dd5f0-8eb5-4c68-a17b-af8f46674919">
-  <button class="colab-df-quickchart" onclick="quickchart('df-0a2dd5f0-8eb5-4c68-a17b-af8f46674919')"
+<div id="df-f92c1397-447e-4fa6-ada9-f1094ef2b8d6">
+  <button class="colab-df-quickchart" onclick="quickchart('df-f92c1397-447e-4fa6-ada9-f1094ef2b8d6')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1859,14 +1770,14 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-0a2dd5f0-8eb5-4c68-a17b-af8f46674919 button');
+        document.querySelector('#df-f92c1397-447e-4fa6-ada9-f1094ef2b8d6 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_90e65bf3-e713-4620-b2ef-8bd62d8a4d99">
+  <div id="id_49f8dda5-9386-4961-b9b5-bf71ba7961a6">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -1910,7 +1821,7 @@ document.write(`
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_90e65bf3-e713-4620-b2ef-8bd62d8a4d99 button.colab-df-generate');
+        document.querySelector('#id_49f8dda5-9386-4961-b9b5-bf71ba7961a6 button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -1961,43 +1872,43 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>jakarta kompas com   perusahaan yang memproduk...</td>
+      <td>jakarta kompas com   reksa dana pasar uang bri...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>jakarta kompas com   platform ketenagakerjaan ...</td>
+      <td>jakarta kompas com   kepala pusat pengawasan s...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>jakarta kompas com   dalam rangka memperingati...</td>
+      <td>jakarta kompas com   emiten produsen sarung ta...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>jakarta kompas com   setiap pemilik kendaraan ...</td>
+      <td>jakarta kompas com   kementerian pertanian kem...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>jakarta kompas com   pasar modal memegang pera...</td>
+      <td>kompas com   kereta api ka jayabaya rute malan...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>jakarta kompas com   pt kcic menyampaikan perm...</td>
+      <td>jakarta kompas com   honda stylo  cbs secara h...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>kompas com   negara tetangga indonesia di sebe...</td>
+      <td>jakarta kompas com   razia lalu lintas merupak...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>klaten kompas com   motor mogok karena kehabis...</td>
+      <td>jakarta kompas com   honda stylo  cbs merupaka...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>jakarta kompas com   pebalap red bull ktm jack...</td>
+      <td>jakarta kompas com   yamaha grand filano jadi ...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>jakarta kompas com   damri mencatat jumlah pen...</td>
+      <td>jakarta kompas com   mobil dinas presiden ri j...</td>
     </tr>
   </tbody>
 </table>
@@ -2038,43 +1949,43 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>jakarta kompas com perusahaan yang memproduksi...</td>
+      <td>jakarta kompas com reksa dana pasar uang bri g...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>jakarta kompas com platform ketenagakerjaan jo...</td>
+      <td>jakarta kompas com kepala pusat pengawasan sta...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>jakarta kompas com dalam rangka memperingati h...</td>
+      <td>jakarta kompas com emiten produsen sarung tang...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>jakarta kompas com setiap pemilik kendaraan be...</td>
+      <td>jakarta kompas com kementerian pertanian kemen...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>jakarta kompas com pasar modal memegang peran ...</td>
+      <td>kompas com kereta api ka jayabaya rute malang ...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>jakarta kompas com pt kcic menyampaikan permoh...</td>
+      <td>jakarta kompas com honda stylo cbs secara harg...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>kompas com negara tetangga indonesia di sebera...</td>
+      <td>jakarta kompas com razia lalu lintas merupakan...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>klaten kompas com motor mogok karena kehabisan...</td>
+      <td>jakarta kompas com honda stylo cbs merupakan s...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>jakarta kompas com pebalap red bull ktm jack m...</td>
+      <td>jakarta kompas com yamaha grand filano jadi pi...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>jakarta kompas com damri mencatat jumlah penum...</td>
+      <td>jakarta kompas com mobil dinas presiden ri jok...</td>
     </tr>
   </tbody>
 </table>
@@ -2116,43 +2027,43 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>jakarta kompas com perusahaan memproduksi wada...</td>
+      <td>jakarta kompas com reksa dana pasar uang bri g...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>jakarta kompas com platform ketenagakerjaan jo...</td>
+      <td>jakarta kompas com kepala pusat pengawasan sta...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>jakarta kompas com rangka memperingati perhubu...</td>
+      <td>jakarta kompas com emiten produsen sarung tang...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>jakarta kompas com pemilik kendaraan bermotor ...</td>
+      <td>jakarta kompas com kementerian pertanian kemen...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>jakarta kompas com pasar modal memegang peran ...</td>
+      <td>kompas com kereta api ka jayabaya rute malang ...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>jakarta kompas com pt kcic permohonan maaf pem...</td>
+      <td>jakarta kompas com honda stylo cbs harga dijua...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>kompas com negara tetangga indonesia seberang ...</td>
+      <td>jakarta kompas com razia lintas kegiatan penga...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>klaten kompas com motor mogok kehabisan bensin...</td>
+      <td>jakarta kompas com honda stylo cbs skutik berg...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>jakarta kompas com pebalap red bull ktm jack m...</td>
+      <td>jakarta kompas com yamaha grand filano pilihan...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>jakarta kompas com damri mencatat penumpang ko...</td>
+      <td>jakarta kompas com mobil dinas presiden ri jok...</td>
     </tr>
   </tbody>
 </table>
@@ -2170,16 +2081,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 152/152 [00:05&lt;00:00, 27.31it/s]
-100%|██████████| 157/157 [00:11&lt;00:00, 13.88it/s]
-100%|██████████| 149/149 [00:11&lt;00:00, 12.49it/s]
-100%|██████████| 175/175 [00:04&lt;00:00, 36.78it/s]
-100%|██████████| 205/205 [00:03&lt;00:00, 51.58it/s]
-100%|██████████| 162/162 [00:05&lt;00:00, 31.50it/s]
-100%|██████████| 256/256 [00:04&lt;00:00, 51.38it/s]
-100%|██████████| 142/142 [00:02&lt;00:00, 61.08it/s]
-100%|██████████| 120/120 [00:06&lt;00:00, 19.56it/s]
-100%|██████████| 186/186 [00:05&lt;00:00, 33.47it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 172/172 [00:03&lt;00:00, 44.76it/s]
+100%|██████████| 239/239 [00:05&lt;00:00, 44.67it/s]
+100%|██████████| 180/180 [00:03&lt;00:00, 50.27it/s]
+100%|██████████| 235/235 [00:07&lt;00:00, 32.04it/s]
+100%|██████████| 204/204 [00:05&lt;00:00, 36.44it/s]
+100%|██████████| 222/222 [00:11&lt;00:00, 19.21it/s]
+100%|██████████| 274/274 [00:08&lt;00:00, 31.96it/s]
+100%|██████████| 151/151 [00:05&lt;00:00, 30.12it/s]
+100%|██████████| 225/225 [00:06&lt;00:00, 33.27it/s]
+100%|██████████| 220/220 [00:08&lt;00:00, 26.96it/s]
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -2206,43 +2117,43 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>jakarta kompas com usaha produksi wadah makan ...</td>
+      <td>jakarta kompas com reksa dana pasar uang bri g...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>jakarta kompas com platform ketenagakerjaan jo...</td>
+      <td>jakarta kompas com kepala pusat awas standar i...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>jakarta kompas com rangka ingat hubung nasiona...</td>
+      <td>jakarta kompas com emiten produsen sarung tang...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>jakarta kompas com milik kendara motor wajib b...</td>
+      <td>jakarta kompas com menteri tani tan tanggap ba...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>jakarta kompas com pasar modal pegang peran ek...</td>
+      <td>kompas com kereta api ka jayabaya rute malang ...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>jakarta kompas com pt kcic mohon maaf batal ja...</td>
+      <td>jakarta kompas com honda stylo cbs harga jual ...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>kompas com negara tetangga indonesia seberang ...</td>
+      <td>jakarta kompas com razia lintas giat awas apar...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>klaten kompas com motor mogok habis bensin mud...</td>
+      <td>jakarta kompas com honda stylo cbs skutik gaya...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>jakarta kompas com balap red bull ktm jack mil...</td>
+      <td>jakarta kompas com yamaha grand filano pilih s...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>jakarta kompas com damri catat tumpang kota pr...</td>
+      <td>jakarta kompas com mobil dinas presiden ri jok...</td>
     </tr>
   </tbody>
 </table>
@@ -2288,7 +2199,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-4fa99be4-0312-4cd7-bb4d-9d80e5b4b075" class="colab-df-container">
+  <div id="df-4d74f438-6e55-454d-bcb4-31c10128d6b0" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2381,7 +2292,7 @@ document.write(`
     </tr>
     <tr>
       <th>2</th>
-      <td>OTOMOTIF</td>
+      <td>MONEY</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2405,11 +2316,11 @@ document.write(`
     </tr>
     <tr>
       <th>3</th>
-      <td>OTOMOTIF</td>
+      <td>MONEY</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.079912</td>
+      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2453,7 +2364,7 @@ document.write(`
     </tr>
     <tr>
       <th>5</th>
-      <td>MONEY</td>
+      <td>OTOMOTIF</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2477,11 +2388,11 @@ document.write(`
     </tr>
     <tr>
       <th>6</th>
-      <td>MONEY</td>
+      <td>OTOMOTIF</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.056221</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2578,7 +2489,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-4fa99be4-0312-4cd7-bb4d-9d80e5b4b075')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-4d74f438-6e55-454d-bcb4-31c10128d6b0')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -2630,12 +2541,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-4fa99be4-0312-4cd7-bb4d-9d80e5b4b075 button.colab-df-convert');
+        document.querySelector('#df-4d74f438-6e55-454d-bcb4-31c10128d6b0 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-4fa99be4-0312-4cd7-bb4d-9d80e5b4b075');
+        const element = document.querySelector('#df-4d74f438-6e55-454d-bcb4-31c10128d6b0');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -2655,8 +2566,8 @@ document.write(`
   </div>
 
 
-<div id="df-ab9fceed-7eed-4918-97c6-76d153bb84e9">
-  <button class="colab-df-quickchart" onclick="quickchart('df-ab9fceed-7eed-4918-97c6-76d153bb84e9')"
+<div id="df-d4752589-4924-45cc-aaf4-fb141f9e72d0">
+  <button class="colab-df-quickchart" onclick="quickchart('df-d4752589-4924-45cc-aaf4-fb141f9e72d0')"
             title="Suggest charts"
             style="display:none;">
 
@@ -2775,14 +2686,14 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-ab9fceed-7eed-4918-97c6-76d153bb84e9 button');
+        document.querySelector('#df-d4752589-4924-45cc-aaf4-fb141f9e72d0 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_9c9f4f7d-718b-4064-9c71-f9bd942f15dc">
+  <div id="id_017f0ecd-24b1-42a9-b7d5-c87ff2d26ca7">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -2826,7 +2737,7 @@ document.write(`
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_9c9f4f7d-718b-4064-9c71-f9bd942f15dc button.colab-df-generate');
+        document.querySelector('#id_017f0ecd-24b1-42a9-b7d5-c87ff2d26ca7 button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -2842,8 +2753,8 @@ document.write(`
 </div></div>
 </div>
 </section>
-<section id="preparing-data">
-<h2>Preparing Data<a class="headerlink" href="#preparing-data" title="Link to this heading">#</a></h2>
+<section id="preparing-data-test">
+<h2>Preparing Data Test<a class="headerlink" href="#preparing-data-test" title="Link to this heading">#</a></h2>
 <section id="encode-label">
 <h3>Encode Label<a class="headerlink" href="#encode-label" title="Link to this heading">#</a></h3>
 <p>Dilakukan tahap encoding pada kolom <strong>[Kategori Berita]</strong> dimana data yang yang terdapat didalamnya masih berupa data kategorik (kata) sehingga perlu dirubah menjadi angka agar bisa dimasukkan ke dalam proses training model</p>
@@ -2859,7 +2770,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-39d22d49-7c5f-4de3-bed2-dc4f1468fb7c" class="colab-df-container">
+  <div id="df-7ecf5af5-618e-4f9b-a50d-d7d6bd06ea0d" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2952,7 +2863,7 @@ document.write(`
     </tr>
     <tr>
       <th>2</th>
-      <td>1</td>
+      <td>0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -2976,11 +2887,11 @@ document.write(`
     </tr>
     <tr>
       <th>3</th>
-      <td>1</td>
+      <td>0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.079912</td>
+      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -3024,7 +2935,7 @@ document.write(`
     </tr>
     <tr>
       <th>5</th>
-      <td>0</td>
+      <td>1</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -3048,11 +2959,11 @@ document.write(`
     </tr>
     <tr>
       <th>6</th>
-      <td>0</td>
+      <td>1</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.000000</td>
+      <td>0.056221</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -3149,7 +3060,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-39d22d49-7c5f-4de3-bed2-dc4f1468fb7c')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-7ecf5af5-618e-4f9b-a50d-d7d6bd06ea0d')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -3201,12 +3112,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-39d22d49-7c5f-4de3-bed2-dc4f1468fb7c button.colab-df-convert');
+        document.querySelector('#df-7ecf5af5-618e-4f9b-a50d-d7d6bd06ea0d button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-39d22d49-7c5f-4de3-bed2-dc4f1468fb7c');
+        const element = document.querySelector('#df-7ecf5af5-618e-4f9b-a50d-d7d6bd06ea0d');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -3226,8 +3137,8 @@ document.write(`
   </div>
 
 
-<div id="df-53f07b3f-442b-4810-8cc5-cf439547dfdd">
-  <button class="colab-df-quickchart" onclick="quickchart('df-53f07b3f-442b-4810-8cc5-cf439547dfdd')"
+<div id="df-d847d95d-1967-4ca3-98b0-0648b5c05a59">
+  <button class="colab-df-quickchart" onclick="quickchart('df-d847d95d-1967-4ca3-98b0-0648b5c05a59')"
             title="Suggest charts"
             style="display:none;">
 
@@ -3346,14 +3257,14 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-53f07b3f-442b-4810-8cc5-cf439547dfdd button');
+        document.querySelector('#df-d847d95d-1967-4ca3-98b0-0648b5c05a59 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_f06e4ff3-e0e6-43c1-9b2d-5dbf69ca8947">
+  <div id="id_d131232b-e838-4f9c-b017-8ca980f326e6">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -3397,7 +3308,7 @@ document.write(`
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_f06e4ff3-e0e6-43c1-9b2d-5dbf69ca8947 button.colab-df-generate');
+        document.querySelector('#id_d131232b-e838-4f9c-b017-8ca980f326e6 button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -3414,9 +3325,8 @@ document.write(`
 </div>
 </section>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="testing-data">
-<h1>Testing Data<a class="headerlink" href="#testing-data" title="Link to this heading">#</a></h1>
+<section id="testing-data">
+<h2>Testing Data<a class="headerlink" href="#testing-data" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the saved model from file</span>
@@ -3437,7 +3347,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 0 0 0 0 1 0 1 1 0]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 0 0 0 0 1 1 1 1 1]
 </pre></div>
 </div>
 </div>
@@ -3452,7 +3362,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-4effcaf7-e928-4035-8b9c-9e53790a8af0" class="colab-df-container">
+  <div id="df-0d74681c-2ba7-4664-9fbf-c9ee035aebd6" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3488,12 +3398,12 @@ document.write(`
     </tr>
     <tr>
       <th>2</th>
-      <td>1</td>
+      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1</td>
+      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
@@ -3503,13 +3413,13 @@ document.write(`
     </tr>
     <tr>
       <th>5</th>
-      <td>0</td>
+      <td>1</td>
       <td>1</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>0</td>
-      <td>0</td>
+      <td>1</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>7</th>
@@ -3524,7 +3434,7 @@ document.write(`
     <tr>
       <th>9</th>
       <td>1</td>
-      <td>0</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -3532,7 +3442,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-4effcaf7-e928-4035-8b9c-9e53790a8af0')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-0d74681c-2ba7-4664-9fbf-c9ee035aebd6')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -3584,12 +3494,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-4effcaf7-e928-4035-8b9c-9e53790a8af0 button.colab-df-convert');
+        document.querySelector('#df-0d74681c-2ba7-4664-9fbf-c9ee035aebd6 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-4effcaf7-e928-4035-8b9c-9e53790a8af0');
+        const element = document.querySelector('#df-0d74681c-2ba7-4664-9fbf-c9ee035aebd6');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -3609,8 +3519,8 @@ document.write(`
   </div>
 
 
-<div id="df-5f212880-f840-494d-8777-e8179e4c91fe">
-  <button class="colab-df-quickchart" onclick="quickchart('df-5f212880-f840-494d-8777-e8179e4c91fe')"
+<div id="df-d84b22ac-6318-42f7-9846-66be0670135c">
+  <button class="colab-df-quickchart" onclick="quickchart('df-d84b22ac-6318-42f7-9846-66be0670135c')"
             title="Suggest charts"
             style="display:none;">
 
@@ -3729,14 +3639,14 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-5f212880-f840-494d-8777-e8179e4c91fe button');
+        document.querySelector('#df-d84b22ac-6318-42f7-9846-66be0670135c button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_9c20c562-a170-4b68-8966-bca2f2b177ec">
+  <div id="id_26fc5f94-f0e4-4337-b844-6f6b175ec1c1">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -3780,7 +3690,7 @@ document.write(`
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_9c20c562-a170-4b68-8966-bca2f2b177ec button.colab-df-generate');
+        document.querySelector('#id_26fc5f94-f0e4-4337-b844-6f6b175ec1c1 button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -3795,6 +3705,7 @@ document.write(`
   </div>
 </div></div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -3827,6 +3738,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="main.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tugas 3.1 : Implementasi Algoritma Logistic Regression</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../tugas-4/centrality.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tugas 4.1 : Mencari Keterkaitan antar Berita</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -3843,12 +3772,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Tugas 3 : Implementasi Algoritma Logistic Regression</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-data">Persiapan Data</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data-model">Load Data Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-fungsi-untuk-persiapan-crawling">Membuat Fungsi untuk Persiapan Crawling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pengambilan-data-baru">Pengambilan Data Baru</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-library">Import Library</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#persiapan-data">Persiapan Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data-model">Load Data Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-fungsi-untuk-persiapan-crawling">Membuat Fungsi untuk Persiapan Crawling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pengambilan-data-baru">Pengambilan Data Baru</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#praproses-teks">Praproses Teks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#membuat-fungsi">Membuat Fungsi</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clean-lower">Clean Lower</a></li>
@@ -3859,15 +3789,12 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pembuatan-vsm">Pembuatan VSM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-data">Preparing Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preparing-data-test">Preparing Data Test</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encode-label">Encode Label</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-data">Testing Data</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-data">Testing Data</a></li>
-</ul>
-
   </nav></div>
 
 </div></div>
