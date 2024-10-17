@@ -13,7 +13,7 @@ parts:
   - caption: Centrality
     chapters:
       - file: tugas-4/centrality
-      - file: tugas-4/summatization
+      - file: tugas-4/summarization
   - caption: Keyword Extraction
     chapters:
       - file: tugas-uts/main
