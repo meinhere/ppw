@@ -32,8 +32,6 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['# alat untuk crawling', 'from urllib.request import urlopen', 'from bs4 import BeautifulSoup', '', '# library dasar']
-...
-['', '# library untuk plot', 'import networkx as nx', 'import matplotlib.pyplot as plt', 'import seaborn as sns']
+!pip install -q Sastrawi
 -------------------
 
