@@ -34,6 +34,6 @@ Here is a preview of the cell contents:
 -------------------
 ['# library awal untuk perhitungan dan pengolahan teks', 'import numpy as np', 'import re', 'import pandas as pd', '']
 ...
-['import matplotlib.pyplot as plt', 'import seaborn as sns', '', '# save model', 'import pickle']
+['import seaborn as sns', '', '# save model', 'import pickle', 'import requests']
 -------------------
 
