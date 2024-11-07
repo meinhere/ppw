@@ -32,6 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-!pip install -q Sastrawi
+['# library awal untuk perhitungan dan pengolahan teks', 'import numpy as np', 'import re', 'import pandas as pd', 'import pickle']
+...
+['from Sastrawi.Stemmer.StemmerFactory import StemmerFactory', 'from sklearn.model_selection import train_test_split', '', '# library untuk proses pembentukan vsm', 'from sklearn.feature_extraction.text import TfidfVectorizer']
 -------------------
 

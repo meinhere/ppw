@@ -182,13 +182,14 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Crawling &amp; Logistic Regression</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../tugas-1/main.html">Tugas 1 : Crawling Berita Online</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tugas-2/main.html">Tugas 2 : Membuat VSM dengan isi TF-IDF berdasarkan hasil Crawling Berita Online</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tugas-2/main.html">Tugas 2 : Membuat VSM dengan isi TF-IDF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="main.html">Tugas 3.1 : Implementasi Algoritma Logistic Regression</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas 3.2 : Uji Coba Model Logistic Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Centrality</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../tugas-4/centrality.html">Tugas 4.1 : Mencari Keterkaitan antar Berita</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tugas-4/summarization.html">Tugas 4.2 : Melakukan Ringkasan pada Berita</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Keyword Extraction</span></p>
 <ul class="nav bd-sidenav">
@@ -487,6 +488,7 @@ document.write(`
 
 <span class="c1"># save model</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">requests</span>
 </pre></div>
 </div>
 </div>
@@ -504,14 +506,14 @@ document.write(`
 <h3>Load Data Model<a class="headerlink" href="#load-data-model" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">main_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/meinhere/ppw/master/publish/tugas-2/data_berita.csv&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">main_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/meinhere/ppw/master/publish/tugas-2/dataset/data_berita.csv&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
 <span class="n">main_df</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-f5c1fca2-7eaf-4a4f-b4ff-1f828619419a" class="colab-df-container">
+  <div id="df-fb9b9b3b-2d0b-4e4e-94f1-a11f7a4b611f" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -633,7 +635,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-f5c1fca2-7eaf-4a4f-b4ff-1f828619419a')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-fb9b9b3b-2d0b-4e4e-94f1-a11f7a4b611f')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -685,12 +687,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-f5c1fca2-7eaf-4a4f-b4ff-1f828619419a button.colab-df-convert');
+        document.querySelector('#df-fb9b9b3b-2d0b-4e4e-94f1-a11f7a4b611f button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-f5c1fca2-7eaf-4a4f-b4ff-1f828619419a');
+        const element = document.querySelector('#df-fb9b9b3b-2d0b-4e4e-94f1-a11f7a4b611f');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -710,8 +712,8 @@ document.write(`
   </div>
 
 
-<div id="df-f8e889c8-6ddf-408a-bf21-54dfdce00779">
-  <button class="colab-df-quickchart" onclick="quickchart('df-f8e889c8-6ddf-408a-bf21-54dfdce00779')"
+<div id="df-60bc7610-d652-41e6-b698-743672049451">
+  <button class="colab-df-quickchart" onclick="quickchart('df-60bc7610-d652-41e6-b698-743672049451')"
             title="Suggest charts"
             style="display:none;">
 
@@ -830,14 +832,14 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-f8e889c8-6ddf-408a-bf21-54dfdce00779 button');
+        document.querySelector('#df-60bc7610-d652-41e6-b698-743672049451 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_95e2ecb6-be92-4896-bd64-d8035ab310af">
+  <div id="id_33471325-f3c4-436d-9c65-a5c253487668">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -881,7 +883,7 @@ document.write(`
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_95e2ecb6-be92-4896-bd64-d8035ab310af button.colab-df-generate');
+        document.querySelector('#id_33471325-f3c4-436d-9c65-a5c253487668 button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -1004,43 +1006,31 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 1: 100%|██████████| 15/15 [00:06&lt;00:00,  2.50it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 1: 100%|██████████| 15/15 [00:01&lt;00:00, 12.46it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 3 | Otomotif: 0 | Total: 3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 1 | Otomotif: 1 | Total: 2
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 2: 100%|██████████| 15/15 [00:03&lt;00:00,  4.84it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 2: 100%|██████████| 15/15 [00:00&lt;00:00, 22.94it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 0 | Total: 5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 2 | Otomotif: 2 | Total: 4
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 3: 100%|██████████| 15/15 [00:02&lt;00:00,  5.73it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 3: 100%|██████████| 15/15 [00:02&lt;00:00,  6.75it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 1 | Total: 6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 4 | Otomotif: 3 | Total: 7
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 4: 100%|██████████| 15/15 [00:00&lt;00:00, 15.34it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 2 | Total: 7
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 5: 100%|██████████| 15/15 [00:01&lt;00:00, 12.93it/s]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 3 | Total: 8
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 6: 100%|██████████| 15/15 [00:01&lt;00:00, 10.13it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 4: 100%|██████████| 15/15 [00:00&lt;00:00, 15.58it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 4 | Total: 9
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 7: 100%|██████████| 15/15 [00:01&lt;00:00,  9.23it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Crawling page 5: 100%|██████████| 15/15 [00:02&lt;00:00,  5.14it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=======&gt; Money: 5 | Otomotif: 5 | Total: 10
@@ -1060,7 +1050,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-634c20bc-01f9-42bf-b622-7484e8a02152" class="colab-df-container">
+  <div id="df-fc960a28-2b19-4825-b0c5-4ababbedc120" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1090,81 +1080,81 @@ document.write(`
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>Dana Kelolaan Reksa Dana BRI Gamasteps Tembus ...</td>
-      <td>JAKARTA, KOMPAS.com - Reksa dana pasar uang BR...</td>
-      <td>16/10/2024</td>
-      <td>MONEY</td>
+      <td>Apa Kabar Toyota Veloz Hybrid?</td>
+      <td>JAKARTA, KOMPAS.com - PT Toyota Astra Motor (T...</td>
+      <td>17/10/2024</td>
+      <td>OTOMOTIF</td>
     </tr>
     <tr>
       <th>1</th>
       <td>2</td>
-      <td>Pelanggaran Aturan Wajib SNI, Kemenperin: Sank...</td>
-      <td>JAKARTA, KOMPAS.com - Kepala Pusat Pengawasan ...</td>
-      <td>16/10/2024</td>
+      <td>Ekonom Ingatkan Kabinet 'Gemuk' Prabowo Bisa B...</td>
+      <td>JAKARTA, KOMPAS.com - Kepala Pusat Makroekonom...</td>
+      <td>17/10/2024</td>
       <td>MONEY</td>
     </tr>
     <tr>
       <th>2</th>
       <td>3</td>
-      <td>Mark Dynamics Catat Penjualan Naik 173 Persen ...</td>
-      <td>JAKARTA, KOMPAS.com - Emiten produsen sarung t...</td>
-      <td>16/10/2024</td>
-      <td>MONEY</td>
+      <td>IMOS 2024 Siap Digelar, Ini Bocoran Motor yang...</td>
+      <td>JAKARTA, KOMPAS.com - Pameran otomotif Indones...</td>
+      <td>17/10/2024</td>
+      <td>OTOMOTIF</td>
     </tr>
     <tr>
       <th>3</th>
       <td>4</td>
-      <td>Produksi Beras 2024 Diprediksi Turun, Ini Peny...</td>
-      <td>JAKARTA, KOMPAS.com - Kementerian Pertanian (K...</td>
-      <td>16/10/2024</td>
+      <td>Mentan Amran Berhentikan Tiga ASN Kementan Kar...</td>
+      <td>JAKARTA, KOMPAS.com - Menteri Pertanian (Menta...</td>
+      <td>17/10/2024</td>
       <td>MONEY</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
-      <td>Per Hari Ini, KA Jayabaya Pakai Rangkaian Stai...</td>
-      <td>KOMPAS.com - Kereta api (KA) Jayabaya rute Mal...</td>
-      <td>16/10/2024</td>
+      <td>Fintech Lending Batumbu Rombak Jajaran Direksi...</td>
+      <td>JAKARTA, KOMPAS.com - Perusahaan fintech peer ...</td>
+      <td>17/10/2024</td>
       <td>MONEY</td>
     </tr>
     <tr>
       <th>5</th>
       <td>6</td>
-      <td>Hitung Biaya Servis Honda Stylo 160 CBS</td>
-      <td>JAKARTA, KOMPAS.com – Honda Stylo 160 CBS seca...</td>
-      <td>16/10/2024</td>
+      <td>Motor Listrik Royal Enfield Meluncur Bulan Dep...</td>
+      <td>JAKARTA, KOMPAS.com - Lewat Instagram resmi Ro...</td>
+      <td>17/10/2024</td>
       <td>OTOMOTIF</td>
     </tr>
     <tr>
       <th>6</th>
       <td>7</td>
-      <td>Tidak Boleh Sembarangan, Begini Prosedur Razia...</td>
-      <td>JAKARTA, KOMPAS.com – Razia lalu lintas merupa...</td>
-      <td>16/10/2024</td>
-      <td>OTOMOTIF</td>
+      <td>Prabowo Ulang Tahun, Sri Mulyani dan Airlangga...</td>
+      <td>JAKARTA, KOMPAS.com - Menteri Koordinator Bid...</td>
+      <td>17/10/2024</td>
+      <td>MONEY</td>
     </tr>
     <tr>
       <th>7</th>
       <td>8</td>
-      <td>Hitung Konsumsi BBM Honda Stylo 160 CBS, Tembu...</td>
-      <td>JAKARTA, KOMPAS.com – Honda Stylo 160 CBS meru...</td>
-      <td>16/10/2024</td>
-      <td>OTOMOTIF</td>
+      <td>Boy Thohir Ungkap Pengusaha Batu Bara Ingin Ba...</td>
+      <td>JAKARTA, KOMPAS.com - Presiden Direktur PT Ada...</td>
+      <td>17/10/2024</td>
+      <td>MONEY</td>
     </tr>
     <tr>
       <th>8</th>
       <td>9</td>
-      <td>Spesifikasi Lengkap Yamaha Grand Filano, Mesin...</td>
-      <td>JAKARTA, KOMPAS.com - Yamaha Grand Filano jadi...</td>
-      <td>16/10/2024</td>
+      <td>Simak, Perhatikan Cara Melakukan Inreyen Motor...</td>
+      <td>JAKARTA, KOMPAS.com – Inreyen motor adalah pro...</td>
+      <td>17/10/2024</td>
       <td>OTOMOTIF</td>
     </tr>
     <tr>
       <th>9</th>
       <td>10</td>
-      <td>Mobil Presiden Mercedes-Benz S600 Guard dan S6...</td>
-      <td>JAKARTA, KOMPAS.com - Mobil dinas Presiden RI ...</td>
-      <td>16/10/2024</td>
+      <td>Kebiasaan Pengendara Bikin Peredam Kejut Motor...</td>
+      <td>BOGOR, KOMPAS.com - Peredam kejut alias shockb...</td>
+      <td>17/10/2024</td>
       <td>OTOMOTIF</td>
     </tr>
   </tbody>
@@ -1173,7 +1163,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-634c20bc-01f9-42bf-b622-7484e8a02152')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-fc960a28-2b19-4825-b0c5-4ababbedc120')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1225,12 +1215,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-634c20bc-01f9-42bf-b622-7484e8a02152 button.colab-df-convert');
+        document.querySelector('#df-fc960a28-2b19-4825-b0c5-4ababbedc120 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-634c20bc-01f9-42bf-b622-7484e8a02152');
+        const element = document.querySelector('#df-fc960a28-2b19-4825-b0c5-4ababbedc120');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1250,8 +1240,8 @@ document.write(`
   </div>
 
 
-<div id="df-6915acc6-bc4b-4094-96f6-b40b3bbb0384">
-  <button class="colab-df-quickchart" onclick="quickchart('df-6915acc6-bc4b-4094-96f6-b40b3bbb0384')"
+<div id="df-a3501e05-fc83-47c1-aa06-c075097d4e62">
+  <button class="colab-df-quickchart" onclick="quickchart('df-a3501e05-fc83-47c1-aa06-c075097d4e62')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1370,14 +1360,14 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-6915acc6-bc4b-4094-96f6-b40b3bbb0384 button');
+        document.querySelector('#df-a3501e05-fc83-47c1-aa06-c075097d4e62 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_0e20c029-23e2-4c69-a126-8c727c17cef0">
+  <div id="id_26f8fbb5-0c24-4f87-bc37-e84815d33019">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -1421,7 +1411,7 @@ document.write(`
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_0e20c029-23e2-4c69-a126-8c727c17cef0 button.colab-df-generate');
+        document.querySelector('#id_26f8fbb5-0c24-4f87-bc37-e84815d33019 button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -1504,7 +1494,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-68ebe307-3685-4dec-ba87-6c16a8da7a4a" class="colab-df-container">
+  <div id="df-2711be3c-bcbc-4db0-93e3-ac6bac44b585" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1529,43 +1519,43 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>jakarta, kompas.com - reksa dana pasar uang br...</td>
+      <td>jakarta, kompas.com - pt toyota astra motor (t...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>jakarta, kompas.com - kepala pusat pengawasan ...</td>
+      <td>jakarta, kompas.com - kepala pusat makroekonom...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>jakarta, kompas.com - emiten produsen sarung t...</td>
+      <td>jakarta, kompas.com - pameran otomotif indones...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>jakarta, kompas.com - kementerian pertanian (k...</td>
+      <td>jakarta, kompas.com - menteri pertanian (menta...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>kompas.com - kereta api (ka) jayabaya rute mal...</td>
+      <td>jakarta, kompas.com - perusahaan fintech peer ...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>jakarta, kompas.com – honda stylo 160 cbs seca...</td>
+      <td>jakarta, kompas.com - lewat instagram resmi ro...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>jakarta, kompas.com – razia lalu lintas merupa...</td>
+      <td>jakarta, kompas.com - menteri koordinator bid...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>jakarta, kompas.com – honda stylo 160 cbs meru...</td>
+      <td>jakarta, kompas.com - presiden direktur pt ada...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>jakarta, kompas.com - yamaha grand filano jadi...</td>
+      <td>jakarta, kompas.com – inreyen motor adalah pro...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>jakarta, kompas.com - mobil dinas presiden ri ...</td>
+      <td>bogor, kompas.com - peredam kejut alias shockb...</td>
     </tr>
   </tbody>
 </table>
@@ -1573,7 +1563,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-68ebe307-3685-4dec-ba87-6c16a8da7a4a')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-2711be3c-bcbc-4db0-93e3-ac6bac44b585')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -1625,12 +1615,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-68ebe307-3685-4dec-ba87-6c16a8da7a4a button.colab-df-convert');
+        document.querySelector('#df-2711be3c-bcbc-4db0-93e3-ac6bac44b585 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-68ebe307-3685-4dec-ba87-6c16a8da7a4a');
+        const element = document.querySelector('#df-2711be3c-bcbc-4db0-93e3-ac6bac44b585');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -1650,8 +1640,8 @@ document.write(`
   </div>
 
 
-<div id="df-f92c1397-447e-4fa6-ada9-f1094ef2b8d6">
-  <button class="colab-df-quickchart" onclick="quickchart('df-f92c1397-447e-4fa6-ada9-f1094ef2b8d6')"
+<div id="df-5b2a966d-18e8-462d-a37b-0822a5088bf8">
+  <button class="colab-df-quickchart" onclick="quickchart('df-5b2a966d-18e8-462d-a37b-0822a5088bf8')"
             title="Suggest charts"
             style="display:none;">
 
@@ -1770,14 +1760,14 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-f92c1397-447e-4fa6-ada9-f1094ef2b8d6 button');
+        document.querySelector('#df-5b2a966d-18e8-462d-a37b-0822a5088bf8 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_49f8dda5-9386-4961-b9b5-bf71ba7961a6">
+  <div id="id_82d6e4a0-a48e-48da-ae4d-947b9bc7271b">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -1821,7 +1811,7 @@ document.write(`
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_49f8dda5-9386-4961-b9b5-bf71ba7961a6 button.colab-df-generate');
+        document.querySelector('#id_82d6e4a0-a48e-48da-ae4d-947b9bc7271b button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -1872,43 +1862,43 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>jakarta kompas com   reksa dana pasar uang bri...</td>
+      <td>jakarta kompas com   pt toyota astra motor tam...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>jakarta kompas com   kepala pusat pengawasan s...</td>
+      <td>jakarta kompas com   kepala pusat makroekonomi...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>jakarta kompas com   emiten produsen sarung ta...</td>
+      <td>jakarta kompas com   pameran otomotif indonesi...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>jakarta kompas com   kementerian pertanian kem...</td>
+      <td>jakarta kompas com   menteri pertanian mentan ...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>kompas com   kereta api ka jayabaya rute malan...</td>
+      <td>jakarta kompas com   perusahaan fintech peer t...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>jakarta kompas com   honda stylo  cbs secara h...</td>
+      <td>jakarta kompas com   lewat instagram resmi roy...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>jakarta kompas com   razia lalu lintas merupak...</td>
+      <td>jakarta kompas com   menteri koordinator bida...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>jakarta kompas com   honda stylo  cbs merupaka...</td>
+      <td>jakarta kompas com   presiden direktur pt adar...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>jakarta kompas com   yamaha grand filano jadi ...</td>
+      <td>jakarta kompas com   inreyen motor adalah pros...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>jakarta kompas com   mobil dinas presiden ri j...</td>
+      <td>bogor kompas com   peredam kejut alias shockbr...</td>
     </tr>
   </tbody>
 </table>
@@ -1949,43 +1939,43 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>jakarta kompas com reksa dana pasar uang bri g...</td>
+      <td>jakarta kompas com pt toyota astra motor tam m...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>jakarta kompas com kepala pusat pengawasan sta...</td>
+      <td>jakarta kompas com kepala pusat makroekonomi d...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>jakarta kompas com emiten produsen sarung tang...</td>
+      <td>jakarta kompas com pameran otomotif indonesia ...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>jakarta kompas com kementerian pertanian kemen...</td>
+      <td>jakarta kompas com menteri pertanian mentan am...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>kompas com kereta api ka jayabaya rute malang ...</td>
+      <td>jakarta kompas com perusahaan fintech peer to ...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>jakarta kompas com honda stylo cbs secara harg...</td>
+      <td>jakarta kompas com lewat instagram resmi royal...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>jakarta kompas com razia lalu lintas merupakan...</td>
+      <td>jakarta kompas com menteri koordinator bidang ...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>jakarta kompas com honda stylo cbs merupakan s...</td>
+      <td>jakarta kompas com presiden direktur pt adaro ...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>jakarta kompas com yamaha grand filano jadi pi...</td>
+      <td>jakarta kompas com inreyen motor adalah proses...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>jakarta kompas com mobil dinas presiden ri jok...</td>
+      <td>bogor kompas com peredam kejut alias shockbrea...</td>
     </tr>
   </tbody>
 </table>
@@ -2027,43 +2017,43 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>jakarta kompas com reksa dana pasar uang bri g...</td>
+      <td>jakarta kompas com pt toyota astra motor tam m...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>jakarta kompas com kepala pusat pengawasan sta...</td>
+      <td>jakarta kompas com kepala pusat makroekonomi k...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>jakarta kompas com emiten produsen sarung tang...</td>
+      <td>jakarta kompas com pameran otomotif indonesia ...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>jakarta kompas com kementerian pertanian kemen...</td>
+      <td>jakarta kompas com menteri pertanian mentan am...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>kompas com kereta api ka jayabaya rute malang ...</td>
+      <td>jakarta kompas com perusahaan fintech peer to ...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>jakarta kompas com honda stylo cbs harga dijua...</td>
+      <td>jakarta kompas com instagram resmi royal enfie...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>jakarta kompas com razia lintas kegiatan penga...</td>
+      <td>jakarta kompas com menteri koordinator bidang ...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>jakarta kompas com honda stylo cbs skutik berg...</td>
+      <td>jakarta kompas com presiden direktur pt adaro ...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>jakarta kompas com yamaha grand filano pilihan...</td>
+      <td>jakarta kompas com inreyen motor proses pembel...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>jakarta kompas com mobil dinas presiden ri jok...</td>
+      <td>bogor kompas com peredam kejut alias shockbrea...</td>
     </tr>
   </tbody>
 </table>
@@ -2081,16 +2071,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 172/172 [00:03&lt;00:00, 44.76it/s]
-100%|██████████| 239/239 [00:05&lt;00:00, 44.67it/s]
-100%|██████████| 180/180 [00:03&lt;00:00, 50.27it/s]
-100%|██████████| 235/235 [00:07&lt;00:00, 32.04it/s]
-100%|██████████| 204/204 [00:05&lt;00:00, 36.44it/s]
-100%|██████████| 222/222 [00:11&lt;00:00, 19.21it/s]
-100%|██████████| 274/274 [00:08&lt;00:00, 31.96it/s]
-100%|██████████| 151/151 [00:05&lt;00:00, 30.12it/s]
-100%|██████████| 225/225 [00:06&lt;00:00, 33.27it/s]
-100%|██████████| 220/220 [00:08&lt;00:00, 26.96it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 188/188 [00:09&lt;00:00, 19.02it/s]
+100%|██████████| 192/192 [00:05&lt;00:00, 32.62it/s]
+100%|██████████| 430/430 [00:19&lt;00:00, 21.89it/s]
+100%|██████████| 127/127 [00:02&lt;00:00, 54.18it/s]
+100%|██████████| 187/187 [00:08&lt;00:00, 22.52it/s]
+100%|██████████| 128/128 [00:03&lt;00:00, 32.92it/s]
+100%|██████████| 233/233 [00:05&lt;00:00, 40.46it/s]
+100%|██████████| 133/133 [00:05&lt;00:00, 23.56it/s]
+100%|██████████| 196/196 [00:05&lt;00:00, 37.21it/s]
+100%|██████████| 138/138 [00:02&lt;00:00, 48.78it/s]
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -2117,43 +2107,43 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>jakarta kompas com reksa dana pasar uang bri g...</td>
+      <td>jakarta kompas com pt toyota astra motor tam m...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>jakarta kompas com kepala pusat awas standar i...</td>
+      <td>jakarta kompas com kepala pusat makroekonomi u...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>jakarta kompas com emiten produsen sarung tang...</td>
+      <td>jakarta kompas com pamer otomotif indonesia mo...</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>jakarta kompas com menteri tani tan tanggap ba...</td>
+      <td>jakarta kompas com menteri tani tan amran sula...</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>kompas com kereta api ka jayabaya rute malang ...</td>
+      <td>jakarta kompas com usaha fintech peer to peer ...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>jakarta kompas com honda stylo cbs harga jual ...</td>
+      <td>jakarta kompas com instagram resmi royal enfie...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>jakarta kompas com razia lintas giat awas apar...</td>
+      <td>jakarta kompas com menteri koordinator bidang ...</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>jakarta kompas com honda stylo cbs skutik gaya...</td>
+      <td>jakarta kompas com presiden direktur pt adaro ...</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>jakarta kompas com yamaha grand filano pilih s...</td>
+      <td>jakarta kompas com inreyen motor proses beli s...</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>jakarta kompas com mobil dinas presiden ri jok...</td>
+      <td>bogor kompas com redam kejut alias shockbreake...</td>
     </tr>
   </tbody>
 </table>
@@ -2166,40 +2156,451 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the saved model from file</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;tfidf_vectorizer.sav&#39;</span>
-<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+<span class="n">github_raw_url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/meinhere/ppw/master/publish/tugas-3/model/tfidf_vectorizer.sav&quot;</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">github_raw_url</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="n">vectorizer</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-1 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: black;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-1 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-1 pre {
+  padding: 0;
+}
+
+#sk-container-id-1 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-1 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-1 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-1 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-1 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-1 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-1 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-1 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-1 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-1 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-1 label.sk-toggleable__label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-1 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-1 div.sk-label label.sk-toggleable__label,
+#sk-container-id-1 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-1 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-1 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-1 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-1 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-1 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-1 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 1ex;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-1 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-1 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-1 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>TfidfVectorizer()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;TfidfVectorizer<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html">?<span>Documentation for TfidfVectorizer</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>TfidfVectorizer()</pre></div> </div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corpus</span> <span class="o">=</span> <span class="n">main_df</span><span class="p">[</span><span class="s1">&#39;desc_clean_stem&#39;</span><span class="p">]</span>
-<span class="n">tfidf</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+<span class="n">tfidf</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
 
 <span class="n">tfidf</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, 3555)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, 3106)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vocabulary</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vocabulary</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
 <span class="n">tfidf_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">vocabulary</span><span class="p">)</span>
-<span class="n">tfidf_df</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Kategori Berita&#39;</span><span class="p">,</span> <span class="n">main_df</span><span class="p">[</span><span class="s1">&#39;Kategori Berita&#39;</span><span class="p">])</span>
+<span class="n">tfidf_df</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">main_df</span><span class="p">[</span><span class="s1">&#39;Kategori Berita&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 <span class="n">tfidf_df</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-4d74f438-6e55-454d-bcb4-31c10128d6b0" class="colab-df-container">
+  <div id="df-9579b830-fc29-4956-8766-41ea4758e41b" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2218,7 +2619,6 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Kategori Berita</th>
       <th>aaion</th>
       <th>aali</th>
       <th>abadi</th>
@@ -2227,32 +2627,33 @@ document.write(`
       <th>abnormal</th>
       <th>absurd</th>
       <th>ac</th>
-      <th>acapkali</th>
+      <th>acara</th>
+      <th>access</th>
       <th>...</th>
+      <th>yzr</th>
       <th>za</th>
       <th>zad</th>
-      <th>zag</th>
       <th>zaman</th>
       <th>zarco</th>
       <th>zenix</th>
       <th>zero</th>
-      <th>zig</th>
       <th>zigzag</th>
       <th>zona</th>
+      <th>label</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>MONEY</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2263,20 +2664,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>OTOMOTIF</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>MONEY</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2287,20 +2688,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>MONEY</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>MONEY</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.034029</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2311,20 +2712,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.145886</td>
+      <td>OTOMOTIF</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>MONEY</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2335,20 +2736,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>MONEY</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>MONEY</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2359,20 +2760,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>MONEY</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>OTOMOTIF</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2383,20 +2784,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>OTOMOTIF</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>OTOMOTIF</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.056221</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.037542</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2407,20 +2808,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>MONEY</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>OTOMOTIF</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2431,20 +2832,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>MONEY</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>OTOMOTIF</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2455,20 +2856,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>OTOMOTIF</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>OTOMOTIF</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2479,17 +2880,17 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>OTOMOTIF</td>
     </tr>
   </tbody>
 </table>
-<p>10 rows × 3556 columns</p>
+<p>10 rows × 3107 columns</p>
 </div>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-4d74f438-6e55-454d-bcb4-31c10128d6b0')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-9579b830-fc29-4956-8766-41ea4758e41b')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -2541,12 +2942,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-4d74f438-6e55-454d-bcb4-31c10128d6b0 button.colab-df-convert');
+        document.querySelector('#df-9579b830-fc29-4956-8766-41ea4758e41b button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-4d74f438-6e55-454d-bcb4-31c10128d6b0');
+        const element = document.querySelector('#df-9579b830-fc29-4956-8766-41ea4758e41b');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -2566,8 +2967,8 @@ document.write(`
   </div>
 
 
-<div id="df-d4752589-4924-45cc-aaf4-fb141f9e72d0">
-  <button class="colab-df-quickchart" onclick="quickchart('df-d4752589-4924-45cc-aaf4-fb141f9e72d0')"
+<div id="df-43f73748-9299-40fe-91bb-98be543686f9">
+  <button class="colab-df-quickchart" onclick="quickchart('df-43f73748-9299-40fe-91bb-98be543686f9')"
             title="Suggest charts"
             style="display:none;">
 
@@ -2686,14 +3087,14 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-d4752589-4924-45cc-aaf4-fb141f9e72d0 button');
+        document.querySelector('#df-43f73748-9299-40fe-91bb-98be543686f9 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_017f0ecd-24b1-42a9-b7d5-c87ff2d26ca7">
+  <div id="id_d5de76d1-e4dd-431f-8873-20df56898a39">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -2737,7 +3138,7 @@ document.write(`
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_017f0ecd-24b1-42a9-b7d5-c87ff2d26ca7 button.colab-df-generate');
+        document.querySelector('#id_d5de76d1-e4dd-431f-8873-20df56898a39 button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -2762,7 +3163,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># menggunakan label_encoder untuk merubah kata menjadi angka</span>
 <span class="n">label_encoder</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelEncoder</span><span class="p">()</span>
-<span class="n">tfidf_df</span><span class="p">[</span><span class="s1">&#39;Kategori Berita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">tfidf_df</span><span class="p">[</span><span class="s1">&#39;Kategori Berita&#39;</span><span class="p">])</span>
+<span class="n">tfidf_df</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">tfidf_df</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">])</span>
 
 <span class="n">tfidf_df</span>
 </pre></div>
@@ -2770,7 +3171,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-7ecf5af5-618e-4f9b-a50d-d7d6bd06ea0d" class="colab-df-container">
+  <div id="df-f65479a3-7797-4e4b-b0d8-bfae9b0c5f76" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -2789,7 +3190,6 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Kategori Berita</th>
       <th>aaion</th>
       <th>aali</th>
       <th>abadi</th>
@@ -2798,32 +3198,33 @@ document.write(`
       <th>abnormal</th>
       <th>absurd</th>
       <th>ac</th>
-      <th>acapkali</th>
+      <th>acara</th>
+      <th>access</th>
       <th>...</th>
+      <th>yzr</th>
       <th>za</th>
       <th>zad</th>
-      <th>zag</th>
       <th>zaman</th>
       <th>zarco</th>
       <th>zenix</th>
       <th>zero</th>
-      <th>zig</th>
       <th>zigzag</th>
       <th>zona</th>
+      <th>label</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2834,20 +3235,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2858,20 +3259,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.000000</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.034029</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2882,20 +3283,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.145886</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2906,20 +3307,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2930,20 +3331,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>1</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2954,20 +3355,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>1</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.056221</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.037542</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -2978,20 +3379,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>1</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -3002,20 +3403,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>1</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -3026,20 +3427,20 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>1</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.000000</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
       <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
@@ -3050,17 +3451,17 @@ document.write(`
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <td>0.000000</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
-<p>10 rows × 3556 columns</p>
+<p>10 rows × 3107 columns</p>
 </div>
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-7ecf5af5-618e-4f9b-a50d-d7d6bd06ea0d')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-f65479a3-7797-4e4b-b0d8-bfae9b0c5f76')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -3112,12 +3513,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-7ecf5af5-618e-4f9b-a50d-d7d6bd06ea0d button.colab-df-convert');
+        document.querySelector('#df-f65479a3-7797-4e4b-b0d8-bfae9b0c5f76 button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-7ecf5af5-618e-4f9b-a50d-d7d6bd06ea0d');
+        const element = document.querySelector('#df-f65479a3-7797-4e4b-b0d8-bfae9b0c5f76');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -3137,8 +3538,8 @@ document.write(`
   </div>
 
 
-<div id="df-d847d95d-1967-4ca3-98b0-0648b5c05a59">
-  <button class="colab-df-quickchart" onclick="quickchart('df-d847d95d-1967-4ca3-98b0-0648b5c05a59')"
+<div id="df-808a0ac4-e5f2-45b1-abc5-1dbb75d3f4d8">
+  <button class="colab-df-quickchart" onclick="quickchart('df-808a0ac4-e5f2-45b1-abc5-1dbb75d3f4d8')"
             title="Suggest charts"
             style="display:none;">
 
@@ -3257,14 +3658,14 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-d847d95d-1967-4ca3-98b0-0648b5c05a59 button');
+        document.querySelector('#df-808a0ac4-e5f2-45b1-abc5-1dbb75d3f4d8 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_d131232b-e838-4f9c-b017-8ca980f326e6">
+  <div id="id_9ff62c4b-596a-4e47-b3c0-5db431d550d9">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -3308,7 +3709,7 @@ document.write(`
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_d131232b-e838-4f9c-b017-8ca980f326e6 button.colab-df-generate');
+        document.querySelector('#id_9ff62c4b-596a-4e47-b3c0-5db431d550d9 button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -3330,16 +3731,427 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the saved model from file</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;lr_model.sav&#39;</span>
-<span class="n">lr_model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">))</span>
+<span class="n">github_raw_url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/meinhere/ppw/master/publish/tugas-3/model/lr_model.sav&quot;</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">github_raw_url</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+<span class="n">lr_model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="n">lr_model</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>#sk-container-id-2 {
+  /* Definition of color scheme common for light and dark mode */
+  --sklearn-color-text: black;
+  --sklearn-color-line: gray;
+  /* Definition of color scheme for unfitted estimators */
+  --sklearn-color-unfitted-level-0: #fff5e6;
+  --sklearn-color-unfitted-level-1: #f6e4d2;
+  --sklearn-color-unfitted-level-2: #ffe0b3;
+  --sklearn-color-unfitted-level-3: chocolate;
+  /* Definition of color scheme for fitted estimators */
+  --sklearn-color-fitted-level-0: #f0f8ff;
+  --sklearn-color-fitted-level-1: #d4ebff;
+  --sklearn-color-fitted-level-2: #b3dbfd;
+  --sklearn-color-fitted-level-3: cornflowerblue;
+
+  /* Specific color for light theme */
+  --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, white)));
+  --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, black)));
+  --sklearn-color-icon: #696969;
+
+  @media (prefers-color-scheme: dark) {
+    /* Redefinition of color scheme for dark theme */
+    --sklearn-color-text-on-default-background: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-background: var(--sg-background-color, var(--theme-background, var(--jp-layout-color0, #111)));
+    --sklearn-color-border-box: var(--sg-text-color, var(--theme-code-foreground, var(--jp-content-font-color1, white)));
+    --sklearn-color-icon: #878787;
+  }
+}
+
+#sk-container-id-2 {
+  color: var(--sklearn-color-text);
+}
+
+#sk-container-id-2 pre {
+  padding: 0;
+}
+
+#sk-container-id-2 input.sk-hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+#sk-container-id-2 div.sk-dashed-wrapped {
+  border: 1px dashed var(--sklearn-color-line);
+  margin: 0 0.4em 0.5em 0.4em;
+  box-sizing: border-box;
+  padding-bottom: 0.4em;
+  background-color: var(--sklearn-color-background);
+}
+
+#sk-container-id-2 div.sk-container {
+  /* jupyter's `normalize.less` sets `[hidden] { display: none; }`
+     but bootstrap.min.css set `[hidden] { display: none !important; }`
+     so we also need the `!important` here to be able to override the
+     default hidden behavior on the sphinx rendered scikit-learn.org.
+     See: https://github.com/scikit-learn/scikit-learn/issues/21755 */
+  display: inline-block !important;
+  position: relative;
+}
+
+#sk-container-id-2 div.sk-text-repr-fallback {
+  display: none;
+}
+
+div.sk-parallel-item,
+div.sk-serial,
+div.sk-item {
+  /* draw centered vertical line to link estimators */
+  background-image: linear-gradient(var(--sklearn-color-text-on-default-background), var(--sklearn-color-text-on-default-background));
+  background-size: 2px 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* Parallel-specific style estimator block */
+
+#sk-container-id-2 div.sk-parallel-item::after {
+  content: "";
+  width: 100%;
+  border-bottom: 2px solid var(--sklearn-color-text-on-default-background);
+  flex-grow: 1;
+}
+
+#sk-container-id-2 div.sk-parallel {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  background-color: var(--sklearn-color-background);
+  position: relative;
+}
+
+#sk-container-id-2 div.sk-parallel-item {
+  display: flex;
+  flex-direction: column;
+}
+
+#sk-container-id-2 div.sk-parallel-item:first-child::after {
+  align-self: flex-end;
+  width: 50%;
+}
+
+#sk-container-id-2 div.sk-parallel-item:last-child::after {
+  align-self: flex-start;
+  width: 50%;
+}
+
+#sk-container-id-2 div.sk-parallel-item:only-child::after {
+  width: 0;
+}
+
+/* Serial-specific style estimator block */
+
+#sk-container-id-2 div.sk-serial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--sklearn-color-background);
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+
+/* Toggleable style: style used for estimator/Pipeline/ColumnTransformer box that is
+clickable and can be expanded/collapsed.
+- Pipeline and ColumnTransformer use this feature and define the default style
+- Estimators will overwrite some part of the style using the `sk-estimator` class
+*/
+
+/* Pipeline and ColumnTransformer style (default) */
+
+#sk-container-id-2 div.sk-toggleable {
+  /* Default theme specific background. It is overwritten whether we have a
+  specific estimator or a Pipeline/ColumnTransformer */
+  background-color: var(--sklearn-color-background);
+}
+
+/* Toggleable label */
+#sk-container-id-2 label.sk-toggleable__label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0.5em;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+#sk-container-id-2 label.sk-toggleable__label-arrow:before {
+  /* Arrow on the left of the label */
+  content: "▸";
+  float: left;
+  margin-right: 0.25em;
+  color: var(--sklearn-color-icon);
+}
+
+#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {
+  color: var(--sklearn-color-text);
+}
+
+/* Toggleable content - dropdown */
+
+#sk-container-id-2 div.sk-toggleable__content {
+  max-height: 0;
+  max-width: 0;
+  overflow: hidden;
+  text-align: left;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-2 div.sk-toggleable__content.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-2 div.sk-toggleable__content pre {
+  margin: 0.2em;
+  border-radius: 0.25em;
+  color: var(--sklearn-color-text);
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-2 div.sk-toggleable__content.fitted pre {
+  /* unfitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {
+  /* Expand drop-down */
+  max-height: 200px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
+  content: "▾";
+}
+
+/* Pipeline/ColumnTransformer-specific style */
+
+#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-2 div.sk-label.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator-specific style */
+
+/* Colorize estimator box */
+#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-2 div.sk-estimator.fitted input.sk-toggleable__control:checked~label.sk-toggleable__label {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+#sk-container-id-2 div.sk-label label.sk-toggleable__label,
+#sk-container-id-2 div.sk-label label {
+  /* The background is the default theme color */
+  color: var(--sklearn-color-text-on-default-background);
+}
+
+/* On hover, darken the color of the background */
+#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+/* Label box, darken color on hover, fitted */
+#sk-container-id-2 div.sk-label.fitted:hover label.sk-toggleable__label.fitted {
+  color: var(--sklearn-color-text);
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Estimator label */
+
+#sk-container-id-2 div.sk-label label {
+  font-family: monospace;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1.2em;
+}
+
+#sk-container-id-2 div.sk-label-container {
+  text-align: center;
+}
+
+/* Estimator-specific */
+#sk-container-id-2 div.sk-estimator {
+  font-family: monospace;
+  border: 1px dotted var(--sklearn-color-border-box);
+  border-radius: 0.25em;
+  box-sizing: border-box;
+  margin-bottom: 0.5em;
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-0);
+}
+
+#sk-container-id-2 div.sk-estimator.fitted {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-0);
+}
+
+/* on hover */
+#sk-container-id-2 div.sk-estimator:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-2);
+}
+
+#sk-container-id-2 div.sk-estimator.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-2);
+}
+
+/* Specification for estimator info (e.g. "i" and "?") */
+
+/* Common style for "i" and "?" */
+
+.sk-estimator-doc-link,
+a:link.sk-estimator-doc-link,
+a:visited.sk-estimator-doc-link {
+  float: right;
+  font-size: smaller;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1em;
+  height: 1em;
+  width: 1em;
+  text-decoration: none !important;
+  margin-left: 1ex;
+  /* unfitted */
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+  color: var(--sklearn-color-unfitted-level-1);
+}
+
+.sk-estimator-doc-link.fitted,
+a:link.sk-estimator-doc-link.fitted,
+a:visited.sk-estimator-doc-link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+div.sk-estimator:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover,
+div.sk-label-container:hover .sk-estimator-doc-link:hover,
+.sk-estimator-doc-link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+div.sk-estimator.fitted:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover,
+div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
+.sk-estimator-doc-link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+/* Span, style for the box shown on hovering the info icon */
+.sk-estimator-doc-link span {
+  display: none;
+  z-index: 9999;
+  position: relative;
+  font-weight: normal;
+  right: .2ex;
+  padding: .5ex;
+  margin: .5ex;
+  width: min-content;
+  min-width: 20ex;
+  max-width: 50ex;
+  color: var(--sklearn-color-text);
+  box-shadow: 2pt 2pt 4pt #999;
+  /* unfitted */
+  background: var(--sklearn-color-unfitted-level-0);
+  border: .5pt solid var(--sklearn-color-unfitted-level-3);
+}
+
+.sk-estimator-doc-link.fitted span {
+  /* fitted */
+  background: var(--sklearn-color-fitted-level-0);
+  border: var(--sklearn-color-fitted-level-3);
+}
+
+.sk-estimator-doc-link:hover span {
+  display: block;
+}
+
+/* "?"-specific style due to the `<a>` HTML tag */
+
+#sk-container-id-2 a.estimator_doc_link {
+  float: right;
+  font-size: 1rem;
+  line-height: 1em;
+  font-family: monospace;
+  background-color: var(--sklearn-color-background);
+  border-radius: 1rem;
+  height: 1rem;
+  width: 1rem;
+  text-decoration: none;
+  /* unfitted */
+  color: var(--sklearn-color-unfitted-level-1);
+  border: var(--sklearn-color-unfitted-level-1) 1pt solid;
+}
+
+#sk-container-id-2 a.estimator_doc_link.fitted {
+  /* fitted */
+  border: var(--sklearn-color-fitted-level-1) 1pt solid;
+  color: var(--sklearn-color-fitted-level-1);
+}
+
+/* On hover */
+#sk-container-id-2 a.estimator_doc_link:hover {
+  /* unfitted */
+  background-color: var(--sklearn-color-unfitted-level-3);
+  color: var(--sklearn-color-background);
+  text-decoration: none;
+}
+
+#sk-container-id-2 a.estimator_doc_link.fitted:hover {
+  /* fitted */
+  background-color: var(--sklearn-color-fitted-level-3);
+}
+</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LogisticRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow fitted">&nbsp;&nbsp;LogisticRegression<a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.5/modules/generated/sklearn.linear_model.LogisticRegression.html">?<span>Documentation for LogisticRegression</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></label><div class="sk-toggleable__content fitted"><pre>LogisticRegression()</pre></div> </div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_test</span> <span class="o">=</span> <span class="n">tfidf_df</span><span class="p">[</span><span class="s1">&#39;Kategori Berita&#39;</span><span class="p">]</span>
-<span class="n">x_test</span> <span class="o">=</span> <span class="n">tfidf_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Kategori Berita&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_test</span> <span class="o">=</span> <span class="n">tfidf_df</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">tfidf_df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;label&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">lr_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
@@ -3347,7 +4159,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 0 0 0 0 1 1 1 1 1]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 0 1 0 0 1 0 0 1 1]
 </pre></div>
 </div>
 </div>
@@ -3362,7 +4174,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-  <div id="df-0d74681c-2ba7-4664-9fbf-c9ee035aebd6" class="colab-df-container">
+  <div id="df-bf2498ae-988e-402d-86b2-ae519bc198ba" class="colab-df-container">
     <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -3388,8 +4200,8 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>0</td>
-      <td>0</td>
+      <td>1</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>1</th>
@@ -3398,8 +4210,8 @@ document.write(`
     </tr>
     <tr>
       <th>2</th>
-      <td>0</td>
-      <td>0</td>
+      <td>1</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>3</th>
@@ -3418,13 +4230,13 @@ document.write(`
     </tr>
     <tr>
       <th>6</th>
-      <td>1</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>1</td>
-      <td>1</td>
+      <td>0</td>
+      <td>0</td>
     </tr>
     <tr>
       <th>8</th>
@@ -3442,7 +4254,7 @@ document.write(`
     <div class="colab-df-buttons">
 
   <div class="colab-df-container">
-    <button class="colab-df-convert" onclick="convertToInteractive('df-0d74681c-2ba7-4664-9fbf-c9ee035aebd6')"
+    <button class="colab-df-convert" onclick="convertToInteractive('df-bf2498ae-988e-402d-86b2-ae519bc198ba')"
             title="Convert this dataframe to an interactive table."
             style="display:none;">
 
@@ -3494,12 +4306,12 @@ document.write(`
 
     <script>
       const buttonEl =
-        document.querySelector('#df-0d74681c-2ba7-4664-9fbf-c9ee035aebd6 button.colab-df-convert');
+        document.querySelector('#df-bf2498ae-988e-402d-86b2-ae519bc198ba button.colab-df-convert');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
       async function convertToInteractive(key) {
-        const element = document.querySelector('#df-0d74681c-2ba7-4664-9fbf-c9ee035aebd6');
+        const element = document.querySelector('#df-bf2498ae-988e-402d-86b2-ae519bc198ba');
         const dataTable =
           await google.colab.kernel.invokeFunction('convertToInteractive',
                                                     [key], {});
@@ -3519,8 +4331,8 @@ document.write(`
   </div>
 
 
-<div id="df-d84b22ac-6318-42f7-9846-66be0670135c">
-  <button class="colab-df-quickchart" onclick="quickchart('df-d84b22ac-6318-42f7-9846-66be0670135c')"
+<div id="df-bab29607-a4d6-4600-b350-7be15366dce9">
+  <button class="colab-df-quickchart" onclick="quickchart('df-bab29607-a4d6-4600-b350-7be15366dce9')"
             title="Suggest charts"
             style="display:none;">
 
@@ -3639,14 +4451,14 @@ document.write(`
     }
     (() => {
       let quickchartButtonEl =
-        document.querySelector('#df-d84b22ac-6318-42f7-9846-66be0670135c button');
+        document.querySelector('#df-bab29607-a4d6-4600-b350-7be15366dce9 button');
       quickchartButtonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
     })();
   </script>
 </div>
 
-  <div id="id_26fc5f94-f0e4-4337-b844-6f6b175ec1c1">
+  <div id="id_3550f02d-17e9-4d8a-8a70-171af2afe531">
     <style>
       .colab-df-generate {
         background-color: #E8F0FE;
@@ -3690,7 +4502,7 @@ document.write(`
     <script>
       (() => {
       const buttonEl =
-        document.querySelector('#id_26fc5f94-f0e4-4337-b844-6f6b175ec1c1 button.colab-df-generate');
+        document.querySelector('#id_3550f02d-17e9-4d8a-8a70-171af2afe531 button.colab-df-generate');
       buttonEl.style.display =
         google.colab.kernel.accessAllowed ? 'block' : 'none';
 
@@ -3704,6 +4516,46 @@ document.write(`
     </div>
   </div>
 </div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluation metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+
+<span class="c1"># Confusion matrix</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+
+<span class="c1"># Plotting the confusion matrix (optional)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span>
+            <span class="n">xticklabels</span><span class="o">=</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">,</span>
+            <span class="n">yticklabels</span><span class="o">=</span><span class="n">label_encoder</span><span class="o">.</span><span class="n">classes_</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Actual&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00         5
+           1       1.00      1.00      1.00         5
+
+    accuracy                           1.00        10
+   macro avg       1.00      1.00      1.00        10
+weighted avg       1.00      1.00      1.00        10
+
+Confusion Matrix:
+[[5 0]
+ [0 5]]
+</pre></div>
+</div>
+<img alt="../_images/64746360fe503da60981894a335aa2dde49f87e8d8f4c81fce375e3a57e060d2.png" src="../_images/64746360fe503da60981894a335aa2dde49f87e8d8f4c81fce375e3a57e060d2.png" />
+</div>
 </div>
 </section>
 </section>
