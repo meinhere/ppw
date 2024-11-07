@@ -10,10 +10,15 @@ parts:
       - file: tugas-2/main
       - file: tugas-3/main
       - file: tugas-3/testing
+      - file: tugas-6/main
+      - file: tugas-6/testing
   - caption: Centrality
     chapters:
       - file: tugas-4/centrality
       - file: tugas-4/summarization
+  - caption: Similarity
+    chapters:
+      - file: tugas-5/main
   - caption: Keyword Extraction
     chapters:
       - file: tugas-uts/main
