@@ -1,3 +1,17 @@
 jupyter-book
 matplotlib
 numpy
+pandas
+tqdm
+urlopen
+bs4
+Sastrawi
+pickle
+scikit-learn
+nltk
+matplotlib
+seaborn
+requests
+networkx
+scikit-fuzzy
+

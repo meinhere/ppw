@@ -19,6 +19,9 @@ parts:
   - caption: Similarity
     chapters:
       - file: tugas-5/main
+  - caption: Clustering
+    chapters:
+      - file: tugas-7/main
   - caption: Keyword Extraction
     chapters:
       - file: tugas-uts/main
