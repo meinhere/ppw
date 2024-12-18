@@ -4,6 +4,8 @@ This is to "deploy for my assignment PPW (Pencarian dan Penambangan Web) task". 
 
 Check out the content pages bundled with this sample book to see more.
 
+[Link Website](https://prediksi-berita.meinhere11.serv00.net)
+
 ```{tableofcontents}
 :depth: 1
 ```
